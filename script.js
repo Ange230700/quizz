@@ -19,6 +19,8 @@ const sectionQuizDansHtml = document.querySelector("#section-quiz");
 // on récupère le bouton rejouer dans le HTML
 const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
+
+
 function chargerLaQuestion() {
     //on vide la section des options dans HTML
     sectionDesOptionsDansHtml.innerHTML = "";
@@ -64,6 +66,8 @@ boutonSuivantDansHtml.addEventListener("click", () => {
         // // on cache le bouton suivant
          boutonSuivantDansHtml.style.display = "none";
         
+        // on affiche le bouton rejouer
+        boutonRejouerDansHtml.style.display = "inline-block";
     }
 })
 
@@ -76,44 +80,39 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     boutonRejouerDansHtml.style.display = "none";
 
     // On affiche le bouton suivant
-    //boutonSuivantDansHtml.style.display = "inline-block";
-
-    // On remet le texte de la section quiz à vide
-    sectionQuizDansHtml.innerHTML = `
-     <h1 class="question"></h1>
-
-      <section class="options"></section>
-      <section class="section-bouton">
-        <button class="bouton-clique-en-bas-a-droite" id="bouton-suivant">Suivant</button>
-        <button class="bouton-clique-en-bas-a-droite" id="bouton-rejouer" style="display: none;">Rejouer</button>
-      </section>
-    `;
+    boutonSuivantDansHtml.style.display = "inline-block";
 
     // On charge la question
     chargerLaQuestion();
 
 })
-// // on récupère la première question dans le tableau de question
-// const premiereQuestion = questions[0];
 
-// // on affiche le texte de la question de question.js dans le HTML
-// questionDansHtml.innerText = premiereQuestion.texte;
-
-// // on affiche les options de la question de question.js dans le HTML
-// premiereQuestion.tableauDeChoix.forEach((choix) => {
-//     // on crée un bouton pour chaque option dans le HTML
-//     const boutonDansHtml = document.createElement("button");
-
-//     // on affiche le texte de tableau de choix dans la section de classe options HTML
-//     boutonDansHtml.innerText = choix;
-
-//     // on ajoute une classe option du CSS à chaque bouton
-//     boutonDansHtml.classList.add("option");
-
-//     // on ajoute chaque bouton à la section des options dans le HTML
-//     sectionDesOptionsDansHtml.appendChild(boutonDansHtml);
-// });
-
-// on appelle la fonction chargerLaQuestion
 chargerLaQuestion();
+
+const boutonsOptionsDansHtml = document.querySelectorAll(".option");
+
+boutonsOptionsDansHtml.forEach((bouton) => {
+    bouton.addEventListener("click", () => {
+        if (verifierBonneReponse(bouton.innerText)
+            === true
+        )
+        {
+            bouton.style.backgroundColor = "green";
+            bouton.style.color = "white";
+        } else {
+            bouton.style.backgroundColor = "red";
+            bouton.style.color = "white";
+        }
+    });
+})
+
+function verifierBonneReponse(reponseJoueur) {
+    const bonneReponseDeQuestionActuelle = questions[numeroQuestionActuelle].reponse;
+
+    if (reponseJoueur === bonneReponseDeQuestionActuelle) {
+        return true;
+    } else {
+        return false
+    }
+}
 
