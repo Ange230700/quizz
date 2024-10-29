@@ -17,12 +17,12 @@ body {
     to left,
     #cc5333,
     #23074d
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to left,
     #cc5333,
     #23074d
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +74,7 @@ body {
   transition-timing-function: ease;
 }
 
-#bouton-suivant {
+.bouton-clique-en-bas-a-droite {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
