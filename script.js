@@ -31,6 +31,8 @@ function verifierBonneReponse(reponseJoueur) {
     }
 }
 
+
+
 function chargerLaQuestion() {
     //on vide la section des options dans HTML
     sectionDesOptionsDansHtml.innerHTML = "";
@@ -55,10 +57,10 @@ function chargerLaQuestion() {
         // on ajoute chaque bouton à la section des options dans le HTML
         sectionDesOptionsDansHtml.appendChild(boutonDansHtml);
 
-    
+      
         // on ajoute un événement click à chaque bouton
         boutonDansHtml.addEventListener("click", () => {
-
+            desactiverLesBoutonsOptions();
             if (verifierBonneReponse(boutonDansHtml.innerText) === true ) {
                 boutonDansHtml.style.backgroundColor = "green";
                 boutonDansHtml.style.color = "white";
@@ -72,11 +74,22 @@ function chargerLaQuestion() {
         });
     });
 
+
     // on désactive le bouton suivant
     boutonSuivantDansHtml.disabled = true;
 }
 
 chargerLaQuestion();
+
+function desactiverLesBoutonsOptions() {
+    const boutonOptionsDansHtml = document.querySelectorAll(".option");
+
+    boutonOptionsDansHtml.forEach((bouton) => {
+        bouton.disabled = true;
+    });
+}
+
+
 
 /* ============================================== */
 

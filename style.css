@@ -74,6 +74,12 @@ body {
   transition-timing-function: ease;
 }
 
+.option:disabled {
+  background: #888787;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
 .bouton-clique-en-bas-a-droite {
   padding: 10px 20px;
   border-radius: 5px;
@@ -88,3 +94,5 @@ body {
   color: #ffffff;
   cursor: not-allowed;
 }
+
+
