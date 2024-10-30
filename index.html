@@ -5,20 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
+
+    <script defer type="module" src="script.js"></script>
   </head>
   <body>
     <main id="section-quiz">
-      <h1 class="question">Quel est le meilleur joueur de football?</h1>
+      <h1 class="question"></h1>
 
-      <section class="options">
-        <button class="option">Messi</button>
-        <button class="option">Ronaldo</button>
-        <button class="option">Neymar</button>
-        <button class="option">Mbappe</button>
-      </section>
+      <section class="options"></section>
       <section class="section-bouton">
-        <button id="bouton-suivant">Suivant</button>
+        <button class="bouton-clique-en-bas-a-droite" id="bouton-suivant">Suivant</button>
+        <button class="bouton-clique-en-bas-a-droite" id="bouton-rejouer" style="display: none;">Rejouer</button>
       </section>
     </main>
   </body>

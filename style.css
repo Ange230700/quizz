@@ -17,12 +17,12 @@ body {
     to left,
     #cc5333,
     #23074d
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to left,
     #cc5333,
     #23074d
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,10 +34,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 50%;
+  height: 65%;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   padding: 50px;
+  width: 70vw;
 }
 .options {
   width: 55%;
@@ -66,11 +67,18 @@ body {
   font-size: 18px;
 }
 
-#bouton-suivant{
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    background:#23074d ;
-    color: #ffffff;
+.option:hover {
+  margin-bottom: 10px;
+  transition-duration: 0.5s;
+  transition-property: margin-bottom;
+  transition-timing-function: ease;
+}
+
+.bouton-clique-en-bas-a-droite {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  background: #23074d;
+  color: #ffffff;
 }
