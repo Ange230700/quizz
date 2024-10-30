@@ -1,8 +1,9 @@
-// script.js
-
 // on importe le tableau de questions depuis questions.js
 import questions from './questions.js';
+
 let numeroQuestionActuelle = 0;
+
+/* ======= RECUPERATION ELEMENTS HTML ======= */
 
 // on récupère les éléments HTML pour la question 
 const questionDansHtml = document.querySelector(".question");
@@ -13,13 +14,12 @@ const sectionDesOptionsDansHtml = document.querySelector(".options");
 // on récupère les éléments HTML pour le bouton suivant
 const boutonSuivantDansHtml = document.querySelector("#bouton-suivant");
 
-// on récupère la section quiz dans le HTML
-const sectionQuizDansHtml = document.querySelector("#section-quiz");
-
 // on récupère le bouton rejouer dans le HTML
 const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
+/* ==================================== */
 
+/* =============== FONCTIONS =============== */
 
 function chargerLaQuestion() {
     //on vide la section des options dans HTML
@@ -44,67 +44,21 @@ function chargerLaQuestion() {
 
         // on ajoute chaque bouton à la section des options dans le HTML
         sectionDesOptionsDansHtml.appendChild(boutonDansHtml);
+
+        // on ajoute un événement click à chaque bouton
+        boutonDansHtml.addEventListener("click", () => {
+            if (verifierBonneReponse(boutonDansHtml.innerText) === true) {
+                boutonDansHtml.style.backgroundColor = "green";
+                boutonDansHtml.style.color = "white";
+            } else {
+                boutonDansHtml.style.backgroundColor = "red";
+                boutonDansHtml.style.color = "white";
+            }
+        });
     });
 }
 
-// on ajoute un événement click au bouton suivant
-boutonSuivantDansHtml.addEventListener("click", () => {
-    // On incrémente le numéro de la question actuelle
-    numeroQuestionActuelle = numeroQuestionActuelle + 1;
-
-    // On vérifie si il reste des questions
-    if (numeroQuestionActuelle < questions.length) {
-        // On charge la question
-        chargerLaQuestion();
-    } else {
-        // S'il y a plus de questions, on indique que le quiz est terminé
-        questionDansHtml.innerText = 'Quiz terminé';
-
-        //on vide la section des options dans HTML
-        sectionDesOptionsDansHtml.innerHTML = "";
-
-        // // on cache le bouton suivant
-         boutonSuivantDansHtml.style.display = "none";
-        
-        // on affiche le bouton rejouer
-        boutonRejouerDansHtml.style.display = "inline-block";
-    }
-})
-
-// on ajoute un événement click au bouton rejouer
-boutonRejouerDansHtml.addEventListener("click", () => {
-    // On remet le numéro de la question actuelle à 0
-    numeroQuestionActuelle = 0
-
-    // On cache le bouton rejouer
-    boutonRejouerDansHtml.style.display = "none";
-
-    // On affiche le bouton suivant
-    boutonSuivantDansHtml.style.display = "inline-block";
-
-    // On charge la question
-    chargerLaQuestion();
-
-})
-
 chargerLaQuestion();
-
-const boutonsOptionsDansHtml = document.querySelectorAll(".option");
-
-boutonsOptionsDansHtml.forEach((bouton) => {
-    bouton.addEventListener("click", () => {
-        if (verifierBonneReponse(bouton.innerText)
-            === true
-        )
-        {
-            bouton.style.backgroundColor = "green";
-            bouton.style.color = "white";
-        } else {
-            bouton.style.backgroundColor = "red";
-            bouton.style.color = "white";
-        }
-    });
-})
 
 function verifierBonneReponse(reponseJoueur) {
     const bonneReponseDeQuestionActuelle = questions[numeroQuestionActuelle].reponse;
@@ -116,3 +70,47 @@ function verifierBonneReponse(reponseJoueur) {
     }
 }
 
+/* ============================================== */
+
+/* =============== GESTION DES ÉVÉNEMENTS =============== */
+
+// on ajoute un événement click au bouton suivant
+boutonSuivantDansHtml.addEventListener("click", () => {
+    // On incrémente le numéro de la question actuelle
+    numeroQuestionActuelle = numeroQuestionActuelle + 1;
+    
+    // On vérifie si il reste des questions
+    if (numeroQuestionActuelle < questions.length) {
+        // On charge la question
+        chargerLaQuestion();
+    } else {
+        // S'il y a plus de questions, on indique que le quiz est terminé
+        questionDansHtml.innerText = 'Quiz terminé';
+        
+        //on vide la section des options dans HTML
+        sectionDesOptionsDansHtml.innerHTML = "";
+        
+        // // on cache le bouton suivant
+        boutonSuivantDansHtml.style.display = "none";
+        
+        // on affiche le bouton rejouer
+        boutonRejouerDansHtml.style.display = "inline-block";
+    }
+})
+
+// on ajoute un événement click au bouton rejouer
+boutonRejouerDansHtml.addEventListener("click", () => {
+    // On remet le numéro de la question actuelle à 0
+    numeroQuestionActuelle = 0
+    
+    // On cache le bouton rejouer
+    boutonRejouerDansHtml.style.display = "none";
+    
+    // On affiche le bouton suivant
+    boutonSuivantDansHtml.style.display = "inline-block";
+    
+    // On charge la question
+    chargerLaQuestion();
+})
+
+/* ===================================================== */
