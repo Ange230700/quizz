@@ -82,3 +82,9 @@ body {
   background: #23074d;
   color: #ffffff;
 }
+
+#bouton-suivant:disabled {
+  background: #888787;
+  color: #ffffff;
+  cursor: not-allowed;
+}

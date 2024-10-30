@@ -21,6 +21,16 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
 /* =============== FONCTIONS =============== */
 
+function verifierBonneReponse(reponseJoueur) {
+    const bonneReponseDeQuestionActuelle = questions[numeroQuestionActuelle].reponse;
+
+    if (reponseJoueur === bonneReponseDeQuestionActuelle) {
+        return true;
+    } else {
+        return false
+    }
+}
+
 function chargerLaQuestion() {
     //on vide la section des options dans HTML
     sectionDesOptionsDansHtml.innerHTML = "";
@@ -45,30 +55,28 @@ function chargerLaQuestion() {
         // on ajoute chaque bouton à la section des options dans le HTML
         sectionDesOptionsDansHtml.appendChild(boutonDansHtml);
 
+    
         // on ajoute un événement click à chaque bouton
         boutonDansHtml.addEventListener("click", () => {
-            if (verifierBonneReponse(boutonDansHtml.innerText) === true) {
+
+            if (verifierBonneReponse(boutonDansHtml.innerText) === true ) {
                 boutonDansHtml.style.backgroundColor = "green";
                 boutonDansHtml.style.color = "white";
+                boutonSuivantDansHtml.disabled = false;
+                
             } else {
                 boutonDansHtml.style.backgroundColor = "red";
                 boutonDansHtml.style.color = "white";
+                boutonSuivantDansHtml.disabled = false;
             }
         });
     });
+
+    // on désactive le bouton suivant
+    boutonSuivantDansHtml.disabled = true;
 }
 
 chargerLaQuestion();
-
-function verifierBonneReponse(reponseJoueur) {
-    const bonneReponseDeQuestionActuelle = questions[numeroQuestionActuelle].reponse;
-
-    if (reponseJoueur === bonneReponseDeQuestionActuelle) {
-        return true;
-    } else {
-        return false
-    }
-}
 
 /* ============================================== */
 
