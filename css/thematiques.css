@@ -69,3 +69,14 @@ button.option:hover {
   transition-timing-function: ease, ease, ease;
   transition-property: color, transform, box-shadow;
 }
+
+#message-de-fin-de-quiz {
+  margin-top: 5vh;
+  padding: 2vh;
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+  background: transparent;
+  border-radius: 10px;
+  display: none;
+}

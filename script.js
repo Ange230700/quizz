@@ -43,6 +43,8 @@ scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length
 // on récupère la section des boutons thématiques dans le HTML
 const sectionDesBoutonsThematiquesDansHtml = document.querySelector("#thematiques");
 
+const sectionDuMessageDeFinDansHtml = document.querySelector("#message-de-fin-de-quiz");
+
 
 /* ==================================== */
 
@@ -147,7 +149,7 @@ function changerThematique(thematique) {
     chargerLaQuestion();
 }
 
-function changerLeMessageEnFonctionDuScore() {
+function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
     // on récupère le bouton thématique actif
     const boutonThematiqueActif = document.querySelector(".active");
 
@@ -166,8 +168,9 @@ function changerLeMessageEnFonctionDuScore() {
     } else {
         messageDeFin = tousLesMessagesDeFin[thematique].fail;
     }
-
-    questionDansHtml.innerText = messageDeFin;
+    
+    sectionDuMessageDeFinDansHtml.innerText = messageDeFin;
+    sectionDuMessageDeFinDansHtml.style.display = "block";
     return messageDeFin;
 }
 
@@ -225,13 +228,16 @@ boutonSuivantDansHtml.addEventListener("click", () => {
         // On charge la question
         chargerLaQuestion();
     } else {
-        // S'il y a plus de questions, on indique que le quiz est terminé
-        questionDansHtml.innerText = changerLeMessageEnFonctionDuScore();
+        // On change le message de fin en fonction du score
+        changerLeMessageDeFinEnFonctionDuScoreEtDeThematique();
 
         //on vide la section des options dans HTML
         sectionDesOptionsDansHtml.innerHTML = "";
 
-        // // on cache le bouton suivant
+        // on cache la question
+        questionDansHtml.style.display = "none";
+
+        // on cache le bouton suivant
         boutonSuivantDansHtml.style.display = "none";
 
         // on affiche le bouton rejouer
@@ -246,6 +252,12 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
     // On remet le numéro de la question actuelle à 0
     numeroQuestionActuelle = 0
+
+    // On cache le message de fin
+    sectionDuMessageDeFinDansHtml.style.display = "none";
+
+    // On affiche la question
+    questionDansHtml.style.display = "block";
 
     // On cache le bouton rejouer
     boutonRejouerDansHtml.style.display = "none";
