@@ -1,3 +1,5 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -10,20 +12,29 @@
   </head>
   <body>
     <header id="header">
+      <nav id="thematiques"></nav>
       <section class="conteneur-score">
         <h1 id="score"></h1>
       </section>
     </header>
     <main id="section-quiz">
-      <img class="test" src="images/cinema-test.jpg" alt="cinema">
+      <img class="test" src="images/cinema-test.jpg" alt="cinema" />
       <section class="images-questions">
-      <h1 class="question"></h1>
+        <h1 class="question"></h1>
       </section>
-      <section class="options">
-      </section>
+      <section id="message-de-fin-de-quiz" style="display: none"></section>
+      <section class="options"></section>
       <section class="section-bouton">
-        <button class="bouton-clique-en-bas-a-droite" id="bouton-suivant">Suivant</button>
-        <button class="bouton-clique-en-bas-a-droite" id="bouton-rejouer" style="display: none;">Rejouer</button>
+        <button class="bouton-clique-en-bas-a-droite" id="bouton-suivant">
+          Suivant
+        </button>
+        <button
+          class="bouton-clique-en-bas-a-droite"
+          id="bouton-rejouer"
+          style="display: none"
+        >
+          Rejouer
+        </button>
       </section>
     </main>
   </body>
