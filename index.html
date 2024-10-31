@@ -1,3 +1,5 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -9,7 +11,15 @@
     <script defer type="module" src="script.js"></script>
   </head>
   <body>
-    <header>
+    <header id="header">
+      <nav id="thematiques">
+        <button data-thematique="films-et-series">Films et séries</button>
+        <button data-thematique="musique">Musique</button>
+        <button data-thematique="technologie">Technologie</button>
+        <button data-thematique="histoire">Histoire</button>
+        <button data-thematique="citations">Citations</button>
+        <button data-thematique="marvel">Marvel</button>
+      </nav>
       <h1 id="score"></h1>
     </header>
     <main id="section-quiz">

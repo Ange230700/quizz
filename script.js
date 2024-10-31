@@ -1,9 +1,25 @@
-// on importe le tableau de questions depuis questions.js
-import questions from './questions.js';
+// script.js
 
+// on importe le tableau de questions depuis questions.js
+import questionsFilmsEtSeries from './javascript/questionsFilmsEtSeries.js';
+import questionsMusique from "./javascript/questionsMusique.js";
+import questionsTechnologie from "./javascript/questionsTechnologie.js";
+import questionsHistoire from "./javascript/questionsHistoire.js";
+import questionsCitations from "./javascript/questionsCitations.js";
+import questionsMarvel from "./javascript/questionsMarvel.js";
+
+/* ===== DECLARATION DE VARIABLES POUR LA LOGIQUE ===== */
+
+// on choisit une thématique par défaut
+let questionsThematiqueChoisie = questionsFilmsEtSeries; 
+
+// on initialise le numéro de la question actuelle à 0
 let numeroQuestionActuelle = 0;
 
+// on initialise le score à 0
 let score = 0
+
+/* ===================================================== */
 
 /* ======= RECUPERATION ELEMENTS HTML ======= */
 
@@ -21,7 +37,9 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
 //on récupère l'element HTML de l'id de score
 const scoreDansHtml = document.querySelector("#score");
-scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
+
+const boutonsThematiquesDansHtml = document.querySelectorAll("#thematiques button");
 
 /* ==================================== */
 
@@ -36,7 +54,7 @@ function desactiverLesBoutonsOptions() {
 }
 
 function verifierBonneReponse(reponseJoueur) {
-    const bonneReponseDeQuestionActuelle = questions[numeroQuestionActuelle].reponse;
+    const bonneReponseDeQuestionActuelle = questionsThematiqueChoisie[numeroQuestionActuelle].reponse;
 
     if (reponseJoueur === bonneReponseDeQuestionActuelle) {
         score = score + 1;
@@ -53,7 +71,7 @@ function chargerLaQuestion() {
     sectionDesOptionsDansHtml.innerHTML = "";
 
     // on récupère la question actuelle
-    const questionActuelle = questions[numeroQuestionActuelle];
+    const questionActuelle = questionsThematiqueChoisie[numeroQuestionActuelle];
 
     //on injecte la question actuelle dans le HTML
     questionDansHtml.innerText = questionActuelle.texte;
@@ -80,13 +98,13 @@ function chargerLaQuestion() {
                 boutonDansHtml.style.backgroundColor = "green";
                 boutonDansHtml.style.color = "white";
                 boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+                scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
 
             } else {
                 boutonDansHtml.style.backgroundColor = "red";
                 boutonDansHtml.style.color = "white";
                 boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+                scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
             }
         });
     });
@@ -98,12 +116,44 @@ function chargerLaQuestion() {
 
 chargerLaQuestion();
 
+function changerThematique(thematique) {
+    switch (thematique) {
+        case "films-et-series":
+            questionsThematiqueChoisie = questionsFilmsEtSeries;
+            break;
+        case "musique":
+            questionsThematiqueChoisie = questionsMusique;
+            break;
+        case "technologie":
+            questionsThematiqueChoisie = questionsTechnologie;
+            break;
+        case "histoire":
+            questionsThematiqueChoisie = questionsHistoire;
+            break;
+        case "citations":
+            questionsThematiqueChoisie = questionsCitations;
+            break;
+        case "marvel":
+            questionsThematiqueChoisie = questionsMarvel;
+            break;
+    }
+
+    // On remet le numéro de la question actuelle à 0
+    numeroQuestionActuelle = 0
+
+    // On remet le score à 0
+    score = 0
+    scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
+
+    chargerLaQuestion();
+}
+
 function changerLeMessageEnFonctionDuScore() {
-    if (score === questions.length) {
+    if (score === questionsThematiqueChoisie.length) {
         questionDansHtml.innerText = "Bravo! T'es un boss des séries!";
-    } else if (score > (3 * questions.length) / 4) {
+    } else if (score > (3 * questionsThematiqueChoisie.length) / 4) {
         questionDansHtml.innerText = "Excellent ! Tu maîtrises vraiment bien tes séries !";
-    } else if (score > questions.length / 2) {
+    } else if (score > questionsThematiqueChoisie.length / 2) {
         questionDansHtml.innerText = "Pas mal ! Tu connais bien tes séries !";
     } else if (score > 0) {
         questionDansHtml.innerText = "Pas encore ça, mais tu as de bonnes bases !";
@@ -113,7 +163,20 @@ function changerLeMessageEnFonctionDuScore() {
     return questionDansHtml.innerText;
 }
 
+function activerBoutonThematiqueSelectionne(boutonThematiqueSelectionne) {
+    boutonsThematiquesDansHtml.forEach((bouton) => {
+        bouton.classList.remove("active");
+    });
 
+    boutonThematiqueSelectionne.classList.add("active");
+}
+
+boutonsThematiquesDansHtml.forEach((bouton) => {
+    const thematique = bouton.getAttribute("data-thematique");
+    if (thematique === "films-et-series") {
+        bouton.classList.add("active");
+    }
+})
 
 
 /* ============================================== */
@@ -126,7 +189,7 @@ boutonSuivantDansHtml.addEventListener("click", () => {
     numeroQuestionActuelle = numeroQuestionActuelle + 1;
 
     // On vérifie si il reste des questions
-    if (numeroQuestionActuelle < questions.length) {
+    if (numeroQuestionActuelle < questionsThematiqueChoisie.length) {
         // On charge la question
         chargerLaQuestion();
     } else {
@@ -148,7 +211,7 @@ boutonSuivantDansHtml.addEventListener("click", () => {
 boutonRejouerDansHtml.addEventListener("click", () => {
     // On remet le score à 0
     score = 0
-    scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+    scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
     // On remet le numéro de la question actuelle à 0
     numeroQuestionActuelle = 0
 
@@ -161,5 +224,14 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     // On charge la question
     chargerLaQuestion();
 })
+
+boutonsThematiquesDansHtml.forEach((bouton) => {
+    bouton.addEventListener("click", () => {
+        activerBoutonThematiqueSelectionne(bouton);
+        const thematique = bouton.getAttribute("data-thematique");
+        changerThematique(thematique);
+    });
+});
+
 
 /* ===================================================== */
