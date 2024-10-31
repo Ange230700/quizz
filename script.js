@@ -38,13 +38,16 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
 //on récupère l'element HTML de l'id de score
 const scoreDansHtml = document.querySelector("#score");
-scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
 
 // on récupère la section des boutons thématiques dans le HTML
 const sectionDesBoutonsThematiquesDansHtml = document.querySelector("#thematiques");
 
 const sectionDuMessageDeFinDansHtml = document.querySelector("#message-de-fin-de-quiz");
 
+scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
+
+//on récupère l'element HTML de l'image de la question
+const imageQuestionDansHtml = document.querySelector(".test");
 
 /* ==================================== */
 
@@ -69,6 +72,13 @@ function verifierBonneReponse(reponseJoueur) {
     }
 }
 
+function changerImageEnFonctionDeLaQuestion() {
+    const questionActuelle = questionsThematiqueChoisie[numeroQuestionActuelle];
+    if (questionActuelle.image) {
+        document.querySelector(".test").src = questionActuelle.image;
+    }
+}
+
 function chargerLaQuestion() {
     //on vide la section des options dans HTML
     sectionDesOptionsDansHtml.innerHTML = "";
@@ -78,6 +88,12 @@ function chargerLaQuestion() {
 
     //on injecte la question actuelle dans le HTML
     questionDansHtml.innerText = questionActuelle.texte;
+
+     // Appelle la fonction pour changer l'image en fonction de la question
+     changerImageEnFonctionDeLaQuestion();
+
+    const imageContainer = document.querySelector(".test");  // conteneur pour l'image
+    imageContainer.innerHTML = "";  // On vide l'ancien contenu
 
     //on injecte les choix dans le tableau de choix de la question actuelle dans le HTML
     questionActuelle.tableauDeChoix.forEach((choix) => {
@@ -97,20 +113,44 @@ function chargerLaQuestion() {
         // on ajoute un événement click à chaque bouton
         boutonDansHtml.addEventListener("click", () => {
             desactiverLesBoutonsOptions();
-            if (verifierBonneReponse(boutonDansHtml.innerText) === true) {
-                boutonDansHtml.style.backgroundColor = "green";
-                boutonDansHtml.style.color = "white";
+
+// Ajoute la classe d'animation au bouton pour le faire clignoter
+boutonDansHtml.classList.add("clignotant");
+
+  // Ajoute la classe "animated" au score pour déclencher l'animation
+  scoreDansHtml.classList.add("animated");
+
+  // Supprime d'abord la classe "animated" si elle est encore présente
+  scoreDansHtml.classList.remove("animated");
+
+  // Utilise setTimeout pour forcer le rafraîchissement et permettre le re-déclenchement de l'animation
+  setTimeout(() => {
+      // Ajoute la classe "animated" au score pour déclencher l'animation
+      scoreDansHtml.classList.add("animated");
+  }, 0);  // Utiliser un délai de 0 pour permettre le re-déclenchement immédiat
+
+
+            if (verifierBonneReponse(boutonDansHtml.innerText, choix) === true) {
                 boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
+                scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
+                   // Ajoute la coche ✔️
+                   boutonDansHtml.innerHTML = `<span class="coche">✔️</span> ${choix}`;
+
 
             } else {
-                boutonDansHtml.style.backgroundColor = "red";
-                boutonDansHtml.style.color = "white";
+                boutonDansHtml.innerHTML = `<span class="croix-style">❌</span> ${choix}`
+                scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
                 boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
             }
+
+
+            // Retire la classe d'animation après un certain temps pour permettre un nouveau clignotement à l'avenir
+            setTimeout(() => {
+                boutonDansHtml.classList.remove("clignotant");
+            }, 1000); // Retire après 1 seconde
         });
     });
+
 
 
     // on désactive le bouton suivant
@@ -144,10 +184,27 @@ function changerThematique(thematique) {
 
     // On remet le score à 0
     score = 0
-    scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
+    scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
+
+    // On cache le message de fin
+    sectionDuMessageDeFinDansHtml.style.display = "none";
+
+    // On affiche la question
+    questionDansHtml.style.display = "block";
 
     chargerLaQuestion();
 }
+
+function mettreAJourScore() {
+    scoreDansHtml.innerHTML = `
+        <span>${score}</span>
+        <div class="separator"></div>
+        <span>${questionsThematiqueChoisie.length}</span>
+    `;
+}
+
+
+mettreAJourScore();
 
 function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
     // on récupère le bouton thématique actif
@@ -242,6 +299,9 @@ boutonSuivantDansHtml.addEventListener("click", () => {
 
         // on affiche le bouton rejouer
         boutonRejouerDansHtml.style.display = "inline-block";
+
+        // Masque l'image de la question
+        imageQuestionDansHtml.style.display = "none";
     }
 });
 
@@ -249,7 +309,8 @@ boutonSuivantDansHtml.addEventListener("click", () => {
 boutonRejouerDansHtml.addEventListener("click", () => {
     // On remet le score à 0
     score = 0
-    scoreDansHtml.innerText = `Score: ${score} / ${questionsThematiqueChoisie.length}`;
+
+    scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
     // On remet le numéro de la question actuelle à 0
     numeroQuestionActuelle = 0
 

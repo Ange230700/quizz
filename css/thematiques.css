@@ -2,9 +2,9 @@
 
 html {
   max-width: 100vw;
-  overflow-x: hidden;
-  max-height: 100vh;
-  overflow-y: hidden;
+  /* overflow-x: hidden; */
+  /* max-height: 100vh; */
+  /* overflow-y: hidden; */
 }
 
 html body {
@@ -52,16 +52,15 @@ main#section-quiz {
 }
 
 h1.question {
-  margin-bottom: 5vh;
+  margin-bottom: 1vh;
 }
 
 section.options {
-  margin-bottom: 10vh;
+  margin-bottom: 2vh;
 }
 
 button.option:hover {
   margin-bottom: 0;
-  color: #23074d;
   transform: translateY(-5px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transition-behavior: normal, normal, normal;
