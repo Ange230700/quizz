@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+html {
+  max-width: 100vw;
+  /* overflow-x: hidden; */
+  /* max-height: 100vh; */
+  /* overflow-y: hidden; */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  background: #23074d; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #cc5333,
+    #23074d
+  );
+  background: linear-gradient(
+    to left,
+    #cc5333,
+    #23074d
+  );
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2vh 2vw;
+}
