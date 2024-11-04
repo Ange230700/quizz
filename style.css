@@ -96,4 +96,28 @@ body {
   cursor: not-allowed;
 }
 
+/* a enlever si ne fonctionne pas partie barre de progression  */
+#progressBar {
+  appearance:"none";/*supprime l'apparence par défaut*/
+  width: 70%;/* defini la largeur*/
+  height: 100ps;/*defini la hauteur*/
+  border-radius: 10px;/* rendre les coin arrondis*/
+  background-color: rgb(216, 235, 228);/*couleur de fond (barre non rempli)*/
+  }
+
+  /*progress::-webkit-progress-value {
+    background-color: #703ff769; /* Couleur de la barre remplie (vert) */
+    /*border-radius: 10px; /* Arrondir les coins de la barre remplie */
+
+
+progress::-webkit-progress-bar {
+  background-color: #dad9d8; /* Couleur de la barre de fond (grise) */
+  border-radius: 10px; /* Arrondir les coins de la barre de fond */
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(to right, #ed4912, #740590); /* Dégradé de vert à vert clair */
+  border-radius: 10px;       /* Coins arrondis */
+}
+/*---------------------------------------------------------------------
 

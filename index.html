@@ -8,19 +8,34 @@
 
     <script defer type="module" src="script.js"></script>
   </head>
+
+  <!-- rajoute de la balise barre de progression -->
+ <progress id="progressBar" value="0" max="100"></progress>
+ <!--                                           -->
+ 
   <body>
+ 
+
     <header>
       <h1 id="score"></h1>
+     
+    
+    <button id="updateButton"></button>
     </header>
     <main id="section-quiz">
+      
       <h1 class="question"></h1>
-
+ 
       <section class="options">
+        
       </section>
       <section class="section-bouton">
         <button class="bouton-clique-en-bas-a-droite" id="bouton-suivant">Suivant</button>
         <button class="bouton-clique-en-bas-a-droite" id="bouton-rejouer" style="display: none;">Rejouer</button>
+        
+        
       </section>
+     
     </main>
   </body>
 </html>

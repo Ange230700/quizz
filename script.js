@@ -23,7 +23,10 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 const scoreDansHtml = document.querySelector("#score");
 scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
 
+
 /* ==================================== */
+
+
 
 /* =============== FONCTIONS =============== */
 
@@ -60,6 +63,7 @@ function chargerLaQuestion() {
 
     //on injecte les choix dans le tableau de choix de la question actuelle dans le HTML
     questionActuelle.tableauDeChoix.forEach((choix) => {
+
         // on crée un bouton pour chaque option dans le HTML
         const boutonDansHtml = document.createElement("button");
 
@@ -113,9 +117,6 @@ function changerLeMessageEnFonctionDuScore() {
     return questionDansHtml.innerText;
 }
 
-
-
-
 /* ============================================== */
 
 /* =============== GESTION DES ÉVÉNEMENTS =============== */
@@ -129,6 +130,13 @@ boutonSuivantDansHtml.addEventListener("click", () => {
     if (numeroQuestionActuelle < questions.length) {
         // On charge la question
         chargerLaQuestion();
+
+//----------------------------------------------------
+//a retirer si ne fonctionne pas
+ // Mettre à jour la barre de progression  
+ progressBar.value = numeroQuestionActuelle + 1; 
+
+//------------------------------------------------------
     } else {
         // S'il y a plus de questions, on indique que le quiz est terminé
         questionDansHtml.innerText = changerLeMessageEnFonctionDuScore();
@@ -143,6 +151,19 @@ boutonSuivantDansHtml.addEventListener("click", () => {
         boutonRejouerDansHtml.style.display = "inline-block";
     }
 })
+    //document.getElementById('updateButton').addEventListener('click', function())
+
+// on récupère la balise HTML progress
+//const progressBar = document.getElementById('progressBar');
+
+//Obtenir la valeur actuelle et l'incémenter
+//let currentValue = parseInt(progressBar.ariaValueMax,10);
+
+//if(currentValue< progressBar.max)
+//{
+ //   progressBar.value= currentValue + 1
+//}
+
 
 // on ajoute un événement click au bouton rejouer
 boutonRejouerDansHtml.addEventListener("click", () => {
@@ -158,8 +179,21 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     // On affiche le bouton suivant
     boutonSuivantDansHtml.style.display = "inline-block";
 
+ //a retirer si ne fonctionne pas
+ // On remet à jour la barre de progression  
+ progressBar.value = 0;
+ //-----------------------------------------
     // On charge la question
     chargerLaQuestion();
 })
 
 /* ===================================================== */
+//a retirer si ne fonctionne pas
+// Charger la première question au démarrage  
+chargerLaQuestion();
+progressBar.max = questions.length; // Définir la valeur maximale de la barre de progression
+
+
+
+
+
