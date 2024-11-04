@@ -96,4 +96,8 @@ body {
   cursor: not-allowed;
 }
 
+#timer {
+  justify-content: left;
+}
+
 

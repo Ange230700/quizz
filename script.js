@@ -5,6 +5,10 @@ let numeroQuestionActuelle = 0;
 
 let score = 0
 
+let tempsRestant = 15
+
+let timer = null
+
 /* ======= RECUPERATION ELEMENTS HTML ======= */
 
 // on récupère les éléments HTML pour la question 
@@ -21,7 +25,11 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
 //on récupère l'element HTML de l'id de score
 const scoreDansHtml = document.querySelector("#score");
-scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`; 
+//on récupère l'élément HTMLde l'id barre de progression
+const barreDeProgressionDansHtml = document.querySelector("#barre")
+// on récupère l'élément html du timer
+const timmeurDansHtml = document. querySelector("#timer")
 
 /* ==================================== */
 
@@ -46,7 +54,27 @@ function verifierBonneReponse(reponseJoueur) {
     }
 }
 
+function demarerLeTemps() {
+    //initialise le temps
+    tempsRestant = 15
+    //affiche les 30 secondes et le texte temps restant
+    timmeurDansHtml.innerText = "Temps Restant "+ tempsRestant
 
+         timer = setInterval(() => {
+           tempsRestant--
+           timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+
+           if(tempsRestant <= 0 ) {
+                clearInterval(timer)
+                desactiverLesBoutonsOptions()
+                boutonSuivantDansHtml.disabled = false
+           }
+   },  1000)
+ }
+
+ function arreterLeTemps() { //arrete le timer
+    clearInterval(timer)
+ }
 
 function chargerLaQuestion() {
     //on vide la section des options dans HTML
@@ -72,10 +100,10 @@ function chargerLaQuestion() {
         // on ajoute chaque bouton à la section des options dans le HTML
         sectionDesOptionsDansHtml.appendChild(boutonDansHtml);
 
-
         // on ajoute un événement click à chaque bouton
         boutonDansHtml.addEventListener("click", () => {
             desactiverLesBoutonsOptions();
+            arreterLeTemps()
             if (verifierBonneReponse(boutonDansHtml.innerText) === true) {
                 boutonDansHtml.style.backgroundColor = "green";
                 boutonDansHtml.style.color = "white";
@@ -90,8 +118,7 @@ function chargerLaQuestion() {
             }
         });
     });
-
-
+    demarerLeTemps()
     // on désactive le bouton suivant
     boutonSuivantDansHtml.disabled = true;
 }
@@ -161,5 +188,6 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     // On charge la question
     chargerLaQuestion();
 })
+
 
 /* ===================================================== */
