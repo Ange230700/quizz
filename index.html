@@ -16,18 +16,20 @@
         <progress id="progressBar" value="0" max="100"></progress>
         
         <header id="header">
-      <div id="timer"></div>
-      <nav id="thematiques"></nav>
-      <button id="updateButton"></button>
-      <section class="conteneur-score">
-        <h1 id="score"></h1>
-      </section>
-    </header>
-    <main id="section-quiz">
-      <img class="test" src="images/cinema-test.jpg" alt="cinema" />
-      <section class="images-questions">
-        <h1 class="question"></h1>
-      </section>
+          <nav id="thematiques"></nav>
+          <button id="updateButton"></button>
+          <section class="conteneur-score">
+            <h1 id="score"></h1>
+          </section>
+        </header>
+        <main id="section-quiz">
+          <section class="conteneur-temps">
+            <div id="timer"></div>
+          </section>
+          <img class="test" src="images/cinema-test.jpg" alt="cinema" />
+          <section class="images-questions">
+            <h1 class="question"></h1>
+          </section>
       <section id="message-de-fin-de-quiz" style="display: none"></section>
       <section class="options"></section>
       <section class="section-bouton">
@@ -37,8 +39,7 @@
         <button
           class="bouton-clique-en-bas-a-droite"
           id="bouton-rejouer"
-          style="display: none"
-        >
+          style="display: none">
           Rejouer
         </button>
       </section>
