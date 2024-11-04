@@ -1,5 +1,3 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -10,9 +8,15 @@
 
     <script defer type="module" src="script.js"></script>
   </head>
+  
   <body>
+    <!-- rajoute de la balise barre de progression -->
+  
+    <progress id="progressBar" value="0" max="100"></progress>
+    
     <header id="header">
       <nav id="thematiques"></nav>
+      <button id="updateButton"></button>
       <section class="conteneur-score">
         <h1 id="score"></h1>
       </section>
