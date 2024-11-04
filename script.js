@@ -1,13 +1,30 @@
-// on importe le tableau de questions depuis questions.js
-import questions from './questions.js';
+// script.js
 
+import listeThematiques from './javascript/listeThematiques.js';
+import questionsFilmsEtSeries from './javascript/questionsFilmsEtSeries.js';
+import questionsMusique from "./javascript/questionsMusique.js";
+import questionsTechnologie from "./javascript/questionsTechnologie.js";
+import questionsHistoire from "./javascript/questionsHistoire.js";
+import questionsCitations from "./javascript/questionsCitations.js";
+import questionsMarvel from "./javascript/questionsMarvel.js";
+import tousLesMessagesDeFin from "./javascript/tousLesMessagesDeFin.js";
+
+/* ===== DECLARATION DE VARIABLES POUR LA LOGIQUE ===== */
+
+// on choisit une thématique par défaut
+let questionsThematiqueChoisie = questionsFilmsEtSeries;
+
+// on initialise le numéro de la question actuelle à 0
 let numeroQuestionActuelle = 0;
 
+// on initialise le score à 0
 let score = 0
 
 let tempsRestant = 15
 
 let timer = null
+
+/* ===================================================== */
 
 /* ======= RECUPERATION ELEMENTS HTML ======= */
 
@@ -25,13 +42,26 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
 //on récupère l'element HTML de l'id de score
 const scoreDansHtml = document.querySelector("#score");
-scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`; 
-//on récupère l'élément HTMLde l'id barre de progression
-const barreDeProgressionDansHtml = document.querySelector("#barre")
+
 // on récupère l'élément html du timer
-const timmeurDansHtml = document. querySelector("#timer")
+const timmeurDansHtml = document.querySelector("#timer")
+
+// on récupère la section des boutons thématiques dans le HTML
+const sectionDesBoutonsThematiquesDansHtml = document.querySelector("#thematiques");
+
+const sectionDuMessageDeFinDansHtml = document.querySelector("#message-de-fin-de-quiz");
+
+scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
+
+//on récupère l'element HTML de l'image de la question
+const imageQuestionDansHtml = document.querySelector(".test");
+
+//on récupère l'élément HTML de la barre de progression
+const progressBar = document.querySelector("#progressBar");
 
 /* ==================================== */
+
+
 
 /* =============== FONCTIONS =============== */
 
@@ -44,7 +74,7 @@ function desactiverLesBoutonsOptions() {
 }
 
 function verifierBonneReponse(reponseJoueur) {
-    const bonneReponseDeQuestionActuelle = questions[numeroQuestionActuelle].reponse;
+    const bonneReponseDeQuestionActuelle = questionsThematiqueChoisie[numeroQuestionActuelle].reponse;
 
     if (reponseJoueur === bonneReponseDeQuestionActuelle) {
         score = score + 1;
@@ -54,40 +84,59 @@ function verifierBonneReponse(reponseJoueur) {
     }
 }
 
+
 function demarerLeTemps() {
     //initialise le temps
     tempsRestant = 15
     //affiche les 30 secondes et le texte temps restant
-    timmeurDansHtml.innerText = "Temps Restant "+ tempsRestant
+    timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
 
-         timer = setInterval(() => {
-           tempsRestant--
-           timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+    timer = setInterval(() => {
+        tempsRestant--
+        timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
 
-           if(tempsRestant <= 0 ) {
-                clearInterval(timer)
-                desactiverLesBoutonsOptions()
-                boutonSuivantDansHtml.disabled = false
-           }
-   },  1000)
- }
+        if (tempsRestant <= 0) {
+            clearInterval(timer)
+            timmeurDansHtml.innerText = "Temps Écoulé"
+            desactiverLesBoutonsOptions()
+            boutonSuivantDansHtml.disabled = false
+        }
+    }, 1000)
+}
 
- function arreterLeTemps() { //arrete le timer
-    clearInterval(timer)
- }
+function arreterLeTemps() {
+    if (timer) { //arrete le timer
+        clearInterval(timer)
+        timer = null
+    }
+}
+
+function changerImageEnFonctionDeLaQuestion() {
+    const questionActuelle = questionsThematiqueChoisie[numeroQuestionActuelle];
+    if (questionActuelle.image) {
+        document.querySelector(".test").src = questionActuelle.image;
+    }
+}
 
 function chargerLaQuestion() {
     //on vide la section des options dans HTML
     sectionDesOptionsDansHtml.innerHTML = "";
 
     // on récupère la question actuelle
-    const questionActuelle = questions[numeroQuestionActuelle];
+    const questionActuelle = questionsThematiqueChoisie[numeroQuestionActuelle];
 
     //on injecte la question actuelle dans le HTML
     questionDansHtml.innerText = questionActuelle.texte;
 
+    // Appelle la fonction pour changer l'image en fonction de la question
+    changerImageEnFonctionDeLaQuestion();
+
+    const imageContainer = document.querySelector(".test");  // conteneur pour l'image
+    imageContainer.innerHTML = "";  // On vide l'ancien contenu
+
     //on injecte les choix dans le tableau de choix de la question actuelle dans le HTML
     questionActuelle.tableauDeChoix.forEach((choix) => {
+
         // on crée un bouton pour chaque option dans le HTML
         const boutonDansHtml = document.createElement("button");
 
@@ -104,46 +153,169 @@ function chargerLaQuestion() {
         boutonDansHtml.addEventListener("click", () => {
             desactiverLesBoutonsOptions();
             arreterLeTemps()
-            if (verifierBonneReponse(boutonDansHtml.innerText) === true) {
-                boutonDansHtml.style.backgroundColor = "green";
-                boutonDansHtml.style.color = "white";
+
+            // Ajoute la classe d'animation au bouton pour le faire clignoter
+            boutonDansHtml.classList.add("clignotant");
+
+            // Ajoute la classe "animated" au score pour déclencher l'animation
+            scoreDansHtml.classList.add("animated");
+
+            // Supprime d'abord la classe "animated" si elle est encore présente
+            scoreDansHtml.classList.remove("animated");
+
+            // Utilise setTimeout pour forcer le rafraîchissement et permettre le re-déclenchement de l'animation
+            setTimeout(() => {
+                // Ajoute la classe "animated" au score pour déclencher l'animation
+                scoreDansHtml.classList.add("animated");
+            }, 0);  // Utiliser un délai de 0 pour permettre le re-déclenchement immédiat
+
+
+            if (verifierBonneReponse(boutonDansHtml.innerText, choix) === true) {
                 boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+                scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
+                // Ajoute la coche ✔️
+                boutonDansHtml.innerHTML = `<span class="coche">✔️</span> ${choix}`;
 
             } else {
-                boutonDansHtml.style.backgroundColor = "red";
-                boutonDansHtml.style.color = "white";
+                boutonDansHtml.innerHTML = `<span class="croix-style">❌</span> ${choix}`
+                scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
                 boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
             }
+
+
+            // Retire la classe d'animation après un certain temps pour permettre un nouveau clignotement à l'avenir
+            setTimeout(() => {
+                boutonDansHtml.classList.remove("clignotant");
+            }, 1000); // Retire après 1 seconde
         });
     });
+
     demarerLeTemps()
     // on désactive le bouton suivant
     boutonSuivantDansHtml.disabled = true;
 }
 
-chargerLaQuestion();
-
-function changerLeMessageEnFonctionDuScore() {
-    if (score === questions.length) {
-        questionDansHtml.innerText = "Bravo! T'es un boss des séries!";
-    } else if (score > (3 * questions.length) / 4) {
-        questionDansHtml.innerText = "Excellent ! Tu maîtrises vraiment bien tes séries !";
-    } else if (score > questions.length / 2) {
-        questionDansHtml.innerText = "Pas mal ! Tu connais bien tes séries !";
-    } else if (score > 0) {
-        questionDansHtml.innerText = "Pas encore ça, mais tu as de bonnes bases !";
-    } else {
-        questionDansHtml.innerText = "Tu devrais regarder plus de séries !";
+function changerThematique(thematique) {
+    switch (thematique) {
+        case "films-et-series":
+            questionsThematiqueChoisie = questionsFilmsEtSeries;
+            break;
+        case "musique":
+            questionsThematiqueChoisie = questionsMusique;
+            break;
+        case "technologie":
+            questionsThematiqueChoisie = questionsTechnologie;
+            break;
+        case "histoire":
+            questionsThematiqueChoisie = questionsHistoire;
+            break;
+        case "citations":
+            questionsThematiqueChoisie = questionsCitations;
+            break;
+        case "marvel":
+            questionsThematiqueChoisie = questionsMarvel;
+            break;
     }
-    return questionDansHtml.innerText;
+
+    // On remet le numéro de la question actuelle à 0
+    numeroQuestionActuelle = 0
+
+    // On remet le score à 0
+    score = 0
+    scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
+
+    // On cache le message de fin
+    sectionDuMessageDeFinDansHtml.style.display = "none";
+
+    // On affiche la question
+    questionDansHtml.style.display = "block";
+
+    chargerLaQuestion();
+}
+
+function mettreAJourScore() {
+    scoreDansHtml.innerHTML = `
+        <span>${score}</span>
+        <div class="separator"></div>
+        <span>${questionsThematiqueChoisie.length}</span>
+    `;
 }
 
 
+mettreAJourScore();
 
+function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
+    // on récupère le bouton thématique actif
+    const boutonThematiqueActif = document.querySelector(".active");
+
+    // on récupère la thématique actuelle via l'attribut data-thematique du bouton thématique
+    const thematique = boutonThematiqueActif.getAttribute("data-thematique");
+
+    let messageDeFin;
+    if (score === questionsThematiqueChoisie.length) {
+        messageDeFin = tousLesMessagesDeFin[thematique].perfect;
+    } else if (score > (3 * questionsThematiqueChoisie.length) / 4) {
+        messageDeFin = tousLesMessagesDeFin[thematique].high;
+    } else if (score > questionsThematiqueChoisie.length / 2) {
+        messageDeFin = tousLesMessagesDeFin[thematique].medium;
+    } else if (score > 0) {
+        messageDeFin = tousLesMessagesDeFin[thematique].low;
+    } else {
+        messageDeFin = tousLesMessagesDeFin[thematique].fail;
+    }
+
+    sectionDuMessageDeFinDansHtml.innerText = messageDeFin;
+    sectionDuMessageDeFinDansHtml.style.display = "block";
+    return messageDeFin;
+}
+
+function activerBoutonThematiqueSelectionne(boutonThematiqueSelectionne) {
+    // on récupère les boutons thématiques dans le HTML
+    const boutonsThematiquesDansHtml = document.querySelectorAll("#thematiques button");
+
+    // on parcourt les boutons thématiques dans le HTML
+    boutonsThematiquesDansHtml.forEach((boutonThematique) => {
+        // on enlève la classe active à tous les boutons thématiques
+        boutonThematique.classList.remove("active");
+    });
+
+    // on ajoute la classe active au bouton thématique sélectionné
+    boutonThematiqueSelectionne.classList.add("active");
+}
+
+function creerBoutonsThematiquesDansHtml() {
+    listeThematiques.forEach((thematique, index) => {
+        const boutonThematique = document.createElement("button");
+        boutonThematique.setAttribute("data-thematique", thematique.data_thematique);
+        boutonThematique.innerText = thematique.nom;
+
+        boutonThematique.addEventListener("click", () => {
+            changerThematique(thematique.data_thematique);
+            activerBoutonThematiqueSelectionne(boutonThematique);
+        });
+
+        sectionDesBoutonsThematiquesDansHtml.appendChild(boutonThematique);
+    });
+
+    // on ajoute la classe active au premier bouton thématique
+    const premierBoutonThematiqueDansHtml = document.querySelector("#thematiques button");
+    if (premierBoutonThematiqueDansHtml !== null && premierBoutonThematiqueDansHtml !== undefined) {
+        activerBoutonThematiqueSelectionne(premierBoutonThematiqueDansHtml);
+        changerThematique(premierBoutonThematiqueDansHtml.getAttribute("data-thematique"));
+    }
+}
+
+function initialiserQuiz() {
+    chargerLaQuestion();
+    progressBar.max = questionsThematiqueChoisie.length;
+    progressBar.value = 0;  // Commence à zéro
+}
+
+creerBoutonsThematiquesDansHtml();
+initialiserQuiz();
 
 /* ============================================== */
+
 
 /* =============== GESTION DES ÉVÉNEMENTS =============== */
 
@@ -152,32 +324,59 @@ boutonSuivantDansHtml.addEventListener("click", () => {
     // On incrémente le numéro de la question actuelle
     numeroQuestionActuelle = numeroQuestionActuelle + 1;
 
+
     // On vérifie si il reste des questions
-    if (numeroQuestionActuelle < questions.length) {
+    if (numeroQuestionActuelle < questionsThematiqueChoisie.length) {
         // On charge la question
         chargerLaQuestion();
+
+        //----------------------------------------------------
+        //a retirer si ne fonctionne pas
+        // Mettre à jour la barre de progression
+        console.log(progressBar.value)
+        progressBar.value = numeroQuestionActuelle;
+        console.log(progressBar.value)
+
+        //------------------------------------------------------
     } else {
-        // S'il y a plus de questions, on indique que le quiz est terminé
-        questionDansHtml.innerText = changerLeMessageEnFonctionDuScore();
+
+        progressBar.value = questionsThematiqueChoisie.length;
+        // On change le message de fin en fonction du score
+        changerLeMessageDeFinEnFonctionDuScoreEtDeThematique();
 
         //on vide la section des options dans HTML
         sectionDesOptionsDansHtml.innerHTML = "";
 
-        // // on cache le bouton suivant
+        // on cache la question
+        questionDansHtml.style.display = "none";
+
+        // on cache le bouton suivant
         boutonSuivantDansHtml.style.display = "none";
 
         // on affiche le bouton rejouer
         boutonRejouerDansHtml.style.display = "inline-block";
+
+        // Masque l'image de la question
+        imageQuestionDansHtml.style.display = "none";
     }
-})
+});
 
 // on ajoute un événement click au bouton rejouer
 boutonRejouerDansHtml.addEventListener("click", () => {
     // On remet le score à 0
     score = 0
-    scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+    progressBar.value = 0;
     // On remet le numéro de la question actuelle à 0
     numeroQuestionActuelle = 0
+
+    scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
+
+
+    // On cache le message de fin
+    sectionDuMessageDeFinDansHtml.style.display = "none";
+
+    // On affiche la question
+    questionDansHtml.style.display = "block";
 
     // On cache le bouton rejouer
     boutonRejouerDansHtml.style.display = "none";
@@ -185,9 +384,17 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     // On affiche le bouton suivant
     boutonSuivantDansHtml.style.display = "inline-block";
 
+    //a retirer si ne fonctionne pas
+    // On remet à jour la barre de progression  
+
+    //-----------------------------------------
     // On charge la question
     chargerLaQuestion();
 })
 
 
-/* ===================================================== */
+
+
+
+
+
