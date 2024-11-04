@@ -90,15 +90,21 @@ function demarerLeTemps() {
     //initialise le temps
     tempsRestant = 15
     //affiche les 30 secondes et le texte temps restant
-    timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+    timmeurDansHtml.innerHTML = `
+        <p>${tempsRestant}</p>
+        `
 
     timer = setInterval(() => {
         tempsRestant--
-        timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+        timmeurDansHtml.innerHTML = `
+        <p>${tempsRestant}</p>
+        `
 
         if (tempsRestant <= 0) {
             clearInterval(timer)
-            timmeurDansHtml.innerText = "Temps Écoulé"
+            timmeurDansHtml.innerHTML =`
+        <p>0</p>
+        ` 
             desactiverLesBoutonsOptions()
             boutonSuivantDansHtml.disabled = false
         }
