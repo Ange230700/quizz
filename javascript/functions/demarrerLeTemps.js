@@ -10,15 +10,21 @@ function demarrerLeTemps() {
     //initialise le temps
     variables.tempsRestant = 15
     //affiche les 30 secondes et le texte temps restant
-    timeurDansHtml.innerText = "Temps Restant " + variables.tempsRestant
+    timeurDansHtml.innerHTML = `
+        <p>${variables.tempsRestant}</p>
+    `
 
     variables.timer = setInterval(() => {
         variables.tempsRestant--
-        timeurDansHtml.innerText = "Temps Restant " + variables.tempsRestant
+        timeurDansHtml.innerHTML = `
+            <p>${variables.tempsRestant}</p>
+        `
 
         if (variables.tempsRestant <= 0) {
             clearInterval(variables.timer)
-            timeurDansHtml.innerText = "Temps Écoulé"
+            timeurDansHtml.innerHTML = `
+            <p>0</p>
+        `
             desactiverLesBoutonsOptions()
             boutonSuivantDansHtml.disabled = false
         }
