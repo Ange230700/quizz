@@ -44,7 +44,7 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 const scoreDansHtml = document.querySelector("#score");
 
 // on récupère l'élément html du timer
-const timmeurDansHtml = document.querySelector("#timer")
+const timeurDansHtml = document.querySelector("#timer")
 
 // on récupère la section des boutons thématiques dans le HTML
 const sectionDesBoutonsThematiquesDansHtml = document.querySelector("#thematiques");
@@ -85,20 +85,20 @@ function verifierBonneReponse(reponseJoueur) {
 }
 
 
-function demarerLeTemps() {
+function demarrerLeTemps() {
     if (timer) return;
     //initialise le temps
     tempsRestant = 15
     //affiche les 30 secondes et le texte temps restant
-    timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+    timeurDansHtml.innerText = "Temps Restant " + tempsRestant
 
     timer = setInterval(() => {
         tempsRestant--
-        timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+        timeurDansHtml.innerText = "Temps Restant " + tempsRestant
 
         if (tempsRestant <= 0) {
             clearInterval(timer)
-            timmeurDansHtml.innerText = "Temps Écoulé"
+            timeurDansHtml.innerText = "Temps Écoulé"
             desactiverLesBoutonsOptions()
             boutonSuivantDansHtml.disabled = false
         }
@@ -106,7 +106,7 @@ function demarerLeTemps() {
 }
 
 function arreterLeTemps() {
-    if (timer) { //arrete le timer
+    if (timer) { // arrete le timer
         clearInterval(timer)
         timer = null
     }
@@ -193,7 +193,7 @@ function chargerLaQuestion() {
         });
     });
 
-    demarerLeTemps()
+    demarrerLeTemps()
     // on désactive le bouton suivant
     boutonSuivantDansHtml.disabled = true;
 }
