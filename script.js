@@ -20,6 +20,10 @@ let numeroQuestionActuelle = 0;
 // on initialise le score à 0
 let score = 0
 
+let tempsRestant = 15
+
+let timer = null
+
 /* ===================================================== */
 
 /* ======= RECUPERATION ELEMENTS HTML ======= */
@@ -39,6 +43,9 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 //on récupère l'element HTML de l'id de score
 const scoreDansHtml = document.querySelector("#score");
 
+// on récupère l'élément html du timer
+const timmeurDansHtml = document.querySelector("#timer")
+
 // on récupère la section des boutons thématiques dans le HTML
 const sectionDesBoutonsThematiquesDansHtml = document.querySelector("#thematiques");
 
@@ -51,8 +58,6 @@ const imageQuestionDansHtml = document.querySelector(".test");
 
 //on récupère l'élément HTML de la barre de progression
 const progressBar = document.querySelector("#progressBar");
-
-
 
 /* ==================================== */
 
@@ -79,6 +84,34 @@ function verifierBonneReponse(reponseJoueur) {
     }
 }
 
+
+function demarerLeTemps() {
+    if (timer) return;
+    //initialise le temps
+    tempsRestant = 15
+    //affiche les 30 secondes et le texte temps restant
+    timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+
+    timer = setInterval(() => {
+        tempsRestant--
+        timmeurDansHtml.innerText = "Temps Restant " + tempsRestant
+
+        if (tempsRestant <= 0) {
+            clearInterval(timer)
+            timmeurDansHtml.innerText = "Temps Écoulé"
+            desactiverLesBoutonsOptions()
+            boutonSuivantDansHtml.disabled = false
+        }
+    }, 1000)
+}
+
+function arreterLeTemps() {
+    if (timer) { //arrete le timer
+        clearInterval(timer)
+        timer = null
+    }
+}
+
 function changerImageEnFonctionDeLaQuestion() {
     const questionActuelle = questionsThematiqueChoisie[numeroQuestionActuelle];
     if (questionActuelle.image) {
@@ -96,8 +129,8 @@ function chargerLaQuestion() {
     //on injecte la question actuelle dans le HTML
     questionDansHtml.innerText = questionActuelle.texte;
 
-     // Appelle la fonction pour changer l'image en fonction de la question
-     changerImageEnFonctionDeLaQuestion();
+    // Appelle la fonction pour changer l'image en fonction de la question
+    changerImageEnFonctionDeLaQuestion();
 
     const imageContainer = document.querySelector(".test");  // conteneur pour l'image
     imageContainer.innerHTML = "";  // On vide l'ancien contenu
@@ -117,33 +150,34 @@ function chargerLaQuestion() {
         // on ajoute chaque bouton à la section des options dans le HTML
         sectionDesOptionsDansHtml.appendChild(boutonDansHtml);
 
-
         // on ajoute un événement click à chaque bouton
         boutonDansHtml.addEventListener("click", () => {
+            arreterLeTemps()
             desactiverLesBoutonsOptions();
 
-// Ajoute la classe d'animation au bouton pour le faire clignoter
-boutonDansHtml.classList.add("clignotant");
+            
 
-  // Ajoute la classe "animated" au score pour déclencher l'animation
-  scoreDansHtml.classList.add("animated");
+            // Ajoute la classe d'animation au bouton pour le faire clignoter
+            boutonDansHtml.classList.add("clignotant");
 
-  // Supprime d'abord la classe "animated" si elle est encore présente
-  scoreDansHtml.classList.remove("animated");
+            // Ajoute la classe "animated" au score pour déclencher l'animation
+            scoreDansHtml.classList.add("animated");
 
-  // Utilise setTimeout pour forcer le rafraîchissement et permettre le re-déclenchement de l'animation
-  setTimeout(() => {
-      // Ajoute la classe "animated" au score pour déclencher l'animation
-      scoreDansHtml.classList.add("animated");
-  }, 0);  // Utiliser un délai de 0 pour permettre le re-déclenchement immédiat
+            // Supprime d'abord la classe "animated" si elle est encore présente
+            scoreDansHtml.classList.remove("animated");
+
+            // Utilise setTimeout pour forcer le rafraîchissement et permettre le re-déclenchement de l'animation
+            setTimeout(() => {
+                // Ajoute la classe "animated" au score pour déclencher l'animation
+                scoreDansHtml.classList.add("animated");
+            }, 0);  // Utiliser un délai de 0 pour permettre le re-déclenchement immédiat
 
 
             if (verifierBonneReponse(boutonDansHtml.innerText, choix) === true) {
                 boutonSuivantDansHtml.disabled = false;
                 scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
-                   // Ajoute la coche ✔️
-                   boutonDansHtml.innerHTML = `<span class="coche">✔️</span> ${choix}`;
-
+                // Ajoute la coche ✔️
+                boutonDansHtml.innerHTML = `<span class="coche">✔️</span> ${choix}`;
 
             } else {
                 boutonDansHtml.innerHTML = `<span class="croix-style">❌</span> ${choix}`
@@ -159,8 +193,7 @@ boutonDansHtml.classList.add("clignotant");
         });
     });
 
-
-
+    demarerLeTemps()
     // on désactive le bouton suivant
     boutonSuivantDansHtml.disabled = true;
 }
@@ -217,7 +250,7 @@ mettreAJourScore();
 function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
     // on récupère le bouton thématique actif
     const boutonThematiqueActif = document.querySelector(".active");
-    
+
     // on récupère la thématique actuelle via l'attribut data-thematique du bouton thématique
     const thematique = boutonThematiqueActif.getAttribute("data-thematique");
 
@@ -233,7 +266,7 @@ function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
     } else {
         messageDeFin = tousLesMessagesDeFin[thematique].fail;
     }
-    
+
     sectionDuMessageDeFinDansHtml.innerText = messageDeFin;
     sectionDuMessageDeFinDansHtml.style.display = "block";
     return messageDeFin;
@@ -242,13 +275,13 @@ function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
 function activerBoutonThematiqueSelectionne(boutonThematiqueSelectionne) {
     // on récupère les boutons thématiques dans le HTML
     const boutonsThematiquesDansHtml = document.querySelectorAll("#thematiques button");
-    
+
     // on parcourt les boutons thématiques dans le HTML
     boutonsThematiquesDansHtml.forEach((boutonThematique) => {
         // on enlève la classe active à tous les boutons thématiques
         boutonThematique.classList.remove("active");
     });
-    
+
     // on ajoute la classe active au bouton thématique sélectionné
     boutonThematiqueSelectionne.classList.add("active");
 }
@@ -258,15 +291,15 @@ function creerBoutonsThematiquesDansHtml() {
         const boutonThematique = document.createElement("button");
         boutonThematique.setAttribute("data-thematique", thematique.data_thematique);
         boutonThematique.innerText = thematique.nom;
-        
+
         boutonThematique.addEventListener("click", () => {
             changerThematique(thematique.data_thematique);
             activerBoutonThematiqueSelectionne(boutonThematique);
         });
-        
+
         sectionDesBoutonsThematiquesDansHtml.appendChild(boutonThematique);
     });
-    
+
     // on ajoute la classe active au premier bouton thématique
     const premierBoutonThematiqueDansHtml = document.querySelector("#thematiques button");
     if (premierBoutonThematiqueDansHtml !== null && premierBoutonThematiqueDansHtml !== undefined) {
@@ -315,7 +348,7 @@ creerBoutonsThematiquesDansHtml();
 boutonSuivantDansHtml.addEventListener("click", () => {
     // On incrémente le numéro de la question actuelle
     numeroQuestionActuelle = numeroQuestionActuelle + 1;
-  
+
 
     // On vérifie si il reste des questions
     if (numeroQuestionActuelle < questionsThematiqueChoisie.length) {
@@ -352,11 +385,11 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     // On remet le score à 0
     score = 0
     progressBar.value = 0;
-      // On remet le numéro de la question actuelle à 0
-      numeroQuestionActuelle = 0
+    // On remet le numéro de la question actuelle à 0
+    numeroQuestionActuelle = 0
 
     scoreDansHtml.innerHTML = `<span>${score}</span> <div class="separator"></div> <span>${questionsThematiqueChoisie.length}</span>`;
-  
+
 
     // On cache le message de fin
     sectionDuMessageDeFinDansHtml.style.display = "none";
@@ -370,10 +403,10 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     // On affiche le bouton suivant
     boutonSuivantDansHtml.style.display = "inline-block";
 
- //a retirer si ne fonctionne pas
- // On remet à jour la barre de progression  
+    //a retirer si ne fonctionne pas
+    // On remet à jour la barre de progression  
 
- //-----------------------------------------
+    //-----------------------------------------
     // On charge la question
     chargerLaQuestion();
 })

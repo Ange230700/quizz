@@ -17,7 +17,17 @@ body {
   font-family: "Poppins", sans-serif;
   color: #ffffff;
   background: #23074d; /* fallback for old browsers */
-  background: linear-gradient(to left, #cc5333, #23074d);
+  background: -webkit-linear-gradient(
+    to left,
+    #cc5333,
+    #23074d
+  );
+  background: linear-gradient(
+    to left,
+    #cc5333,
+    #23074d
+  );
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,6 +40,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   border-radius: 10px;
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
   padding: 50px;
@@ -91,6 +102,11 @@ body {
   background: #888787;
   color: #ffffff;
   cursor: not-allowed;
+}
+
+
+#timer {
+  justify-content: left;
 }
 
 #header {
@@ -208,3 +224,4 @@ progress::-webkit-progress-value {
 .clignotant {
   animation: clignote 0.5s linear 2; /* 0.5s durée, 2 fois */
 }
+
