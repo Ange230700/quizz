@@ -21,6 +21,11 @@ import creerBoutonsThematiquesDansHtml from "./javascript/functions/creerBoutons
 import mettreAJourProgressBar from "./javascript/functions/mettreAJourProgressBar.js";
 import initialiserQuiz from "./javascript/functions/initialiserQuiz.js";
 
+// Appel des fonctions
+mettreAJourScore();
+creerBoutonsThematiquesDansHtml();
+initialiserQuiz();
+
 /* =============== MANIPULATION DU DOM =============== */
 
 scoreDansHtml.innerHTML = `
@@ -40,11 +45,14 @@ boutonSuivantDansHtml.addEventListener("click", () => {
     if (variables.numeroQuestionActuelle < variables.questionsThematiqueChoisie.length) {
         // On charge la question
         chargerLaQuestion();
+
+        // On met à jour la barre de progression
         mettreAJourProgressBar();
     } else {
+        // On met à jour la barre de progression
         mettreAJourProgressBar();
 
-        // On change le message de fin en fonction du variables.score
+        // On change le message de fin en fonction du score
         changerLeMessageDeFinEnFonctionDuScoreEtDeThematique();
 
         //on vide la section des options dans HTML
@@ -66,13 +74,20 @@ boutonSuivantDansHtml.addEventListener("click", () => {
 
 // on ajoute un événement click au bouton rejouer
 boutonRejouerDansHtml.addEventListener("click", () => {
-    // On remet le variables.score à 0
+    // On remet le score à 0
     variables.score = 0
+
+    // On remet la barre de progression à 0
     progressBar.value = 0;
+
     // On remet le numéro de la question actuelle à 0
     variables.numeroQuestionActuelle = 0
 
-    scoreDansHtml.innerHTML = `<span>${variables.score}</span> <div class="separator"></div> <span>${variables.questionsThematiqueChoisie.length}</span>`;
+    scoreDansHtml.innerHTML = `
+        <span>${variables.score}</span>
+        <div class="separator"></div>
+        <span>${variables.questionsThematiqueChoisie.length}</span>
+    `;
 
     // On cache le message de fin
     sectionDuMessageDeFinDansHtml.style.display = "none";
@@ -88,14 +103,4 @@ boutonRejouerDansHtml.addEventListener("click", () => {
 
     // On charge la question
     chargerLaQuestion();
-})
-
-mettreAJourScore();
-creerBoutonsThematiquesDansHtml();
-initialiserQuiz();
-
-
-
-
-
-
+});

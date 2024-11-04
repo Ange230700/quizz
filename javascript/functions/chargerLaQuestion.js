@@ -1,10 +1,15 @@
+// import des variables
 import variables from "../variables.js";
+
+// import des éléments HTML récupérés
 import {
     questionDansHtml,
     sectionDesOptionsDansHtml,
     scoreDansHtml,
     boutonSuivantDansHtml
 } from "../elementsHtmlRecuperes.js";
+
+// import des fonctions
 import desactiverLesBoutonsOptions from "./desactiverLesBoutonsOptions.js";
 import verifierBonneReponse from "./verifierBonneReponse.js";
 import demarrerLeTemps from "./demarrerLeTemps.js";
@@ -12,7 +17,7 @@ import arreterLeTemps from "./arreterLeTemps.js";
 import changerImageEnFonctionDeLaQuestion from "./changerImageEnFonctionDeLaQuestion.js";
 
 function chargerLaQuestion() {
-    //on vide la section des options dans HTML
+    // on vide la section des options dans HTML
     sectionDesOptionsDansHtml.innerHTML = "";
 
     // on récupère la question actuelle
@@ -36,7 +41,7 @@ function chargerLaQuestion() {
         // on affiche le texte de tableau de choix dans la section de classe options HTML
         boutonDansHtml.innerText = choix;
 
-        // on ajoute une classe option du CSS à chaque bouton
+        // on ajoute une classe CSS 'option' à chaque bouton
         boutonDansHtml.classList.add("option");
 
         // on ajoute chaque bouton à la section des options dans le HTML
@@ -52,7 +57,7 @@ function chargerLaQuestion() {
             // Ajoute la classe d'animation au bouton pour le faire clignoter
             boutonDansHtml.classList.add("clignotant");
 
-            // Ajoute la classe "animated" au variables.score pour déclencher l'animation
+            // Ajoute la classe "animated" au score pour déclencher l'animation
             scoreDansHtml.classList.add("animated");
 
             // Supprime d'abord la classe "animated" si elle est encore présente
@@ -60,20 +65,34 @@ function chargerLaQuestion() {
 
             // Utilise setTimeout pour forcer le rafraîchissement et permettre le re-déclenchement de l'animation
             setTimeout(() => {
-                // Ajoute la classe "animated" au variables.score pour déclencher l'animation
+                // Ajoute la classe "animated" au score pour déclencher l'animation
                 scoreDansHtml.classList.add("animated");
             }, 0);  // Utiliser un délai de 0 pour permettre le re-déclenchement immédiat
 
 
             if (verifierBonneReponse(boutonDansHtml.innerText, choix) === true) {
+                // on désactive le bouton suivant
                 boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerHTML = `<span>${variables.score}</span> <div class="separator"></div> <span>${variables.questionsThematiqueChoisie.length}</span>`;
+
+                scoreDansHtml.innerHTML = `
+                    <span>${variables.score}</span>
+                    <div class="separator"></div>
+                    <span>${variables.questionsThematiqueChoisie.length}</span>
+                `;
+
                 // Ajoute la coche ✔️
                 boutonDansHtml.innerHTML = `<span class="coche">✔️</span> ${choix}`;
 
             } else {
-                boutonDansHtml.innerHTML = `<span class="croix-style">❌</span> ${choix}`
-                scoreDansHtml.innerHTML = `<span>${variables.score}</span> <div class="separator"></div> <span>${variables.questionsThematiqueChoisie.length}</span>`;
+                boutonDansHtml.innerHTML = `<span class="croix-style">❌</span> ${choix}`;
+
+                scoreDansHtml.innerHTML = `
+                    <span>${variables.score}</span>
+                    <div class="separator"></div>
+                    <span>${variables.questionsThematiqueChoisie.length}</span>
+                `;
+
+                // On active le bouton suivant
                 boutonSuivantDansHtml.disabled = false;
             }
 
@@ -85,7 +104,9 @@ function chargerLaQuestion() {
         });
     });
 
-    demarrerLeTemps()
+    // on redémarre le temps
+    demarrerLeTemps();
+
     // on désactive le bouton suivant
     boutonSuivantDansHtml.disabled = true;
 }

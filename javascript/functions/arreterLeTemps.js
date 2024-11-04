@@ -1,9 +1,13 @@
 import variables from '../variables.js';
 
 function arreterLeTemps() {
-    if (variables.timer) { // arrete le variables.timer
-        clearInterval(variables.timer)
-        variables.timer = null
+    // si le timer est en cours, on l'arrête
+    if (variables.timer) {
+        // arrête le compte à rebours
+        clearInterval(variables.timer);
+
+        // réinitialise le timer
+        variables.timer = null;
     }
 }
 

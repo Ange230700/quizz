@@ -1,4 +1,7 @@
+// import des variables
 import variables from '../variables.js';
+
+// import des éléments HTML récupérés
 import {
     scoreDansHtml
 } from '../elementsHtmlRecuperes.js';

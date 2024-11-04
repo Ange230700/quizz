@@ -1,18 +1,26 @@
+// import des variables
 import variables from "../variables.js";
+
+// import des questions
 import questionsFilmsEtSeries from '../data/questionsFilmsEtSeries.js';
 import questionsMusique from "../data/questionsMusique.js";
 import questionsTechnologie from "../data/questionsTechnologie.js";
 import questionsHistoire from "../data/questionsHistoire.js";
 import questionsCitations from "../data/questionsCitations.js";
 import questionsMarvel from "../data/questionsMarvel.js";
+
+// import des éléments HTML
 import {
     scoreDansHtml,
     sectionDuMessageDeFinDansHtml,
     questionDansHtml
 } from "../elementsHtmlRecuperes.js";
+
+// import des fonctions
 import chargerLaQuestion from "./chargerLaQuestion.js";
 
 function changerThematique(thematique) {
+    // On change les questions en fonction de la thématique
     switch (thematique) {
         case "films-et-series":
             variables.questionsThematiqueChoisie = questionsFilmsEtSeries;
@@ -39,7 +47,11 @@ function changerThematique(thematique) {
 
     // On remet le variables.score à 0
     variables.score = 0
-    scoreDansHtml.innerHTML = `<span>${variables.score}</span> <div class="separator"></div> <span>${variables.questionsThematiqueChoisie.length}</span>`;
+    scoreDansHtml.innerHTML = `
+        <span>${variables.score}</span>
+        <div class="separator"></div>
+        <span>${variables.questionsThematiqueChoisie.length}</span>
+    `;
 
     // On cache le message de fin
     sectionDuMessageDeFinDansHtml.style.display = "none";

@@ -1,5 +1,10 @@
-import variables from "../variables.js";
+// import des messages de fin
 import tousLesMessagesDeFin from "../data/tousLesMessagesDeFin.js";
+
+// import des variables
+import variables from "../variables.js";
+
+// import des éléments HTML récupérés
 import {
     sectionDuMessageDeFinDansHtml
 } from "../elementsHtmlRecuperes.js";
@@ -12,6 +17,8 @@ function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
     const thematique = boutonThematiqueActif.getAttribute("data-thematique");
 
     let messageDeFin;
+
+    // on définit le message de fin en fonction du score
     if (variables.score === variables.questionsThematiqueChoisie.length) {
         messageDeFin = tousLesMessagesDeFin[thematique].perfect;
     } else if (variables.score > (3 * variables.questionsThematiqueChoisie.length) / 4) {
@@ -24,8 +31,12 @@ function changerLeMessageDeFinEnFonctionDuScoreEtDeThematique() {
         messageDeFin = tousLesMessagesDeFin[thematique].fail;
     }
 
+    // on affiche le message de fin
     sectionDuMessageDeFinDansHtml.innerText = messageDeFin;
+
+    // on retourne le message de fin
     sectionDuMessageDeFinDansHtml.style.display = "block";
+
     return messageDeFin;
 }
 

@@ -1,4 +1,7 @@
+// import des variables
 import variables from '../variables.js';
+
+// import des éléments HTML récupérés
 import {
     progressBar
 } from '../elementsHtmlRecuperes.js';
@@ -12,8 +15,6 @@ function mettreAJourProgressBar() {
 
     // Mettre à jour la valeur de la barre de progression
     progressBar.value = progression;
-
-    console.log(`Progression: ${progression}%`); // Debug
 }
 
 export default mettreAJourProgressBar;

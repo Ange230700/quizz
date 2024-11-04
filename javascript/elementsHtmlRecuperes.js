@@ -1,16 +1,16 @@
-// on récupère les éléments HTML pour la question 
+// on récupère le titre h1 dont l'attribut classe est 'question' dans le HTML
 const questionDansHtml = document.querySelector(".question");
 
-//on récupère les éléments HTML pour les options
+// on récupère la section dont l'attribut classe est 'options' dans le HTML
 const sectionDesOptionsDansHtml = document.querySelector(".options");
 
-// on récupère les éléments HTML pour le bouton suivant
+// on récupère le bouton dont l'attribut id est 'bouton-suivant' dans le HTML
 const boutonSuivantDansHtml = document.querySelector("#bouton-suivant");
 
-// on récupère le bouton rejouer dans le HTML
+// on récupère le bouton dont l'attribut id est 'bouton-rejouer' dans le HTML
 const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 
-//on récupère l'element HTML de l'id de score
+// on récupère le titre h1 dont l'attribut id est 'score'
 const scoreDansHtml = document.querySelector("#score");
 
 // on récupère l'élément html du timer
@@ -22,10 +22,10 @@ const sectionDesBoutonsThematiquesDansHtml = document.querySelector("#thematique
 // on récupère la section du message de fin dans le HTML
 const sectionDuMessageDeFinDansHtml = document.querySelector("#message-de-fin-de-quiz");
 
-//on récupère l'element HTML de l'image de la question
+// on récupère l'image de la question dont l'attribut classe est 'test' dans le HTML
 const imageQuestionDansHtml = document.querySelector(".test");
 
-//on récupère l'élément HTML de la barre de progression
+// on récupère la barre de progression dans le HTML
 const progressBar = document.querySelector("#progressBar");
 
 export {
