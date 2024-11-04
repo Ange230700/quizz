@@ -275,14 +275,36 @@ function creerBoutonsThematiquesDansHtml() {
     }
 }
 
+
+function mettreAJourProgressBar() {
+       // Calcul de la progression en fonction du numéro de la question actuelle
+       let progression = (numeroQuestionActuelle / questionsThematiqueChoisie.length) * 100;
+
+       // S'assurer que la progression n'excède pas 100%
+       progression = Math.min(progression, 100);
+   
+       // Mettre à jour la valeur de la barre de progression
+       progressBar.value = progression;
+   
+       console.log(`Progression: ${progression}%`); // Debug
+   }
+
+
+
 function initialiserQuiz() {
+    numeroQuestionActuelle = 0;
+    score = 0;
+    progressBar.value = 0;
     chargerLaQuestion();
-    progressBar.max = questionsThematiqueChoisie.length;
-    progressBar.value = 0;  // Commence à zéro
+    mettreAJourProgressBar();
 }
 
+
+
+
 creerBoutonsThematiquesDansHtml();
-initialiserQuiz();
+
+
 
 /* ============================================== */
 
@@ -299,18 +321,12 @@ boutonSuivantDansHtml.addEventListener("click", () => {
     if (numeroQuestionActuelle < questionsThematiqueChoisie.length) {
         // On charge la question
         chargerLaQuestion();
+        mettreAJourProgressBar();
 
-//----------------------------------------------------
-//a retirer si ne fonctionne pas
- // Mettre à jour la barre de progression
- console.log (progressBar.value)  
- progressBar.value = numeroQuestionActuelle; 
- console.log (progressBar.value)
-
-//------------------------------------------------------
     } else {
 
-        progressBar.value = questionsThematiqueChoisie.length;
+        mettreAJourProgressBar();
+
         // On change le message de fin en fonction du score
         changerLeMessageDeFinEnFonctionDuScoreEtDeThematique();
 
@@ -362,6 +378,7 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     chargerLaQuestion();
 })
 
+initialiserQuiz();
 
 
 
