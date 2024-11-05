@@ -21,6 +21,8 @@ import changerLeMessageDeFinEnFonctionDuScoreEtDeThematique from "./javascript/f
 import creerBoutonsThematiquesDansHtml from "./javascript/functions/creerBoutonsThematiquesDansHtml.js";
 import mettreAJourProgressBar from "./javascript/functions/mettreAJourProgressBar.js";
 import initialiserQuiz from "./javascript/functions/initialiserQuiz.js";
+//import changerImageEnFonctionDeLaQuestion from "./javascript/functions/changerImageEnFonctionDeLaQuestion.js";
+
 
 // Appel des fonctions
 mettreAJourScore();
@@ -49,6 +51,11 @@ boutonSuivantDansHtml.addEventListener("click", () => {
 
         // On met à jour la barre de progression
         mettreAJourProgressBar();
+
+        
+    // // Appelle la fonction pour changer l'image en fonction de la question
+    // changerImageEnFonctionDeLaQuestion();
+
     } else {
         // On met à jour la barre de progression
         mettreAJourProgressBar();
@@ -103,5 +110,5 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     boutonSuivantDansHtml.style.display = "inline-block";
 
     // On charge la question
-    chargerLaQuestion();
+    initialiserQuiz();
 });

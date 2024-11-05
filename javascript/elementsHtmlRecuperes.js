@@ -30,6 +30,9 @@ const imageQuestionDansHtml = document.querySelector(".test");
 // on récupère la barre de progression dans le HTML
 const progressBar = document.querySelector("#progressBar");
 
+// on récupère le nombre de question dans le HTML
+const numeroQuestionDansHtml = document.querySelector(".numero-question");
+
 export {
     questionDansHtml,
     sectionDesOptionsDansHtml,
@@ -40,5 +43,6 @@ export {
     sectionDesBoutonsThematiquesDansHtml,
     sectionDuMessageDeFinDansHtml,
     imageQuestionDansHtml,
-    progressBar
+    progressBar,
+    numeroQuestionDansHtml
 };

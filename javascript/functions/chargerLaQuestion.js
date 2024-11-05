@@ -8,7 +8,9 @@ import {
     questionDansHtml,
     sectionDesOptionsDansHtml,
     scoreDansHtml,
-    boutonSuivantDansHtml
+    boutonSuivantDansHtml,
+    imageQuestionDansHtml,
+    numeroQuestionDansHtml
 } from "../elementsHtmlRecuperes.js";
 
 // import des fonctions
@@ -28,12 +30,14 @@ function chargerLaQuestion() {
     //on injecte la question actuelle dans le HTML
     questionDansHtml.innerText = questionActuelle.texte;
 
+    // on injecte le nombre de question dans le HTML
+    numeroQuestionDansHtml.innerText = `Question ${variables.numeroQuestionActuelle + 1}`;
+
     // Appelle la fonction pour changer l'image en fonction de la question
     changerImageEnFonctionDeLaQuestion();
 
-    const imageContainer = document.querySelector(".test");  // conteneur pour l'image
-    imageContainer.innerHTML = "";  // On vide l'ancien contenu
-
+    imageQuestionDansHtml.style.display = "inline-block";
+    
     //on injecte les choix dans le tableau de choix de la question actuelle dans le HTML
     questionActuelle.tableauDeChoix.forEach((choix) => {
 

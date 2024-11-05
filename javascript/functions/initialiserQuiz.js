@@ -9,6 +9,8 @@ import mettreAJourProgressBar from './mettreAJourProgressBar.js';
 
 // import des éléments HTML récupérés
 import {
+    boutonRejouerDansHtml,
+    boutonSuivantDansHtml,
     progressBar
 } from '../elementsHtmlRecuperes.js';
 
@@ -17,6 +19,9 @@ function initialiserQuiz() {
     variables.numeroQuestionActuelle = 0;
     variables.score = 0;
     progressBar.value = 0;
+
+    boutonSuivantDansHtml.style.display = "inline-block";
+    boutonRejouerDansHtml.style.display = "none";
 
     chargerLaQuestion();
     mettreAJourProgressBar();
