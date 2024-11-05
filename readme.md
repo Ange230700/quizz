@@ -2,7 +2,7 @@
 
 **Aperçu**
 
-Le code fourni est celui d'une application web de quiz qui permet aux utilisateurs de répondre à des questions sur différents thèmes (appelés « thématiques » dans le code). L'application est construite à l'aide de HTML, CSS et JavaScript modulaire (modules ES6). Elle comporte un chargement dynamique des questions, un suivi des scores, une barre de progression et un message de fin de quiz basé sur les performances de l'utilisateur.
+Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre à des questions sur différents thèmes. L'application est construite à l'aide de HTML, CSS et JavaScript. Elle comporte un chargement dynamique des questions, un suivi des scores, une barre de progression et un message de fin de quiz basé sur les performances de l'utilisateur.
 
 ---
 
@@ -14,7 +14,7 @@ Le code fourni est celui d'une application web de quiz qui permet aux utilisateu
    - **Éléments** :
      - **Barre de progression** : Indique la progression de l'utilisateur dans le quiz.
      - **Header** : Contient la navigation pour les thèmes, un bouton de mise à jour et l'affichage du score.
-     - **Section principale** : Affiche le minuteur, l'image de la question, le texte de la question, les options et les boutons de navigation (« Suivant » pour next et « Rejouer » pour replay).
+     - **Section principale** : Affiche le minuteur, l'image de la question, le texte de la question, les options et les boutons de navigation (« Suivant » pour passer à la question suivante et « Rejouer » pour refaire le questionnaire).
 
 2. **Scripts principaux (`script.js`)**
 
@@ -32,12 +32,12 @@ Le code fourni est celui d'une application web de quiz qui permet aux utilisateu
 
 3. **Variables (`variables.js`)**
 
-   - **Objectif** : Stocke l'état de l'application, y compris la série de questions en cours, le numéro de la question en cours, le score de l'utilisateur, le temps restant pour la minuterie et une référence à l'intervalle de la minuterie.
+   - **Objectif** : Stocke l'état de l'application, y compris la série de questions en cours, le numéro de la question en cours, le score de l'utilisateur, le temps restant pour la minuterie.
    - **Valeurs initiales** :
      - **`questionsThematiqueChoisie`** : La valeur initiale est celle des questions « Films et Séries ».
      - **`numeroQuestionActuelle`** : Commence à 0.
      - **`score`** : Commence à 0.
-     - **`tempsRestant`** : Fixé à 5 secondes (bien que dans la fonction de minuterie, il est réinitialisé à 15 secondes).
+     - **`tempsRestant`** : Fixé à 15 secondes par question.
      - **`timer`** : Initialement `null`.
 
 4. **Fichiers de données (par exemple, `questionsFilmsEtSeries.js`)**
@@ -47,7 +47,7 @@ Le code fourni est celui d'une application web de quiz qui permet aux utilisateu
      - **`texte`** : Le texte de la question.
      - **`tableauDeChoix`** : Un tableau de réponses possibles.
      - **`réponse`** : La bonne réponse.
-     - **`image`** : (Facultatif) URL ou chemin d'accès à une image en rapport avec la question.
+     - **`image`** : URL ou chemin d'accès à une image en rapport avec la question.
 
 5. **Fonctions**
 
@@ -153,7 +153,7 @@ Le code fourni est celui d'une application web de quiz qui permet aux utilisateu
 
 3. **Gestion des événements**
 
-   - **Interaction avec l'utilisateur** : Des récepteurs d'événements sont ajoutés pour les boutons d'option, « Next », « Replay » et les boutons de thème.
+   - **Interaction avec l'utilisateur** : Des récepteurs d'événements sont ajoutés pour les boutons d'option, le bouton « Suivant », le bouton « Rejouer » et les boutons de thème.
    - **États des boutons** : Les boutons sont activés ou désactivés de manière appropriée afin de guider l'interaction de l'utilisateur et d'éviter tout comportement involontaire.
 
 4. **Mises à jour de l'interface utilisateur**
@@ -205,13 +205,6 @@ Le code fourni est celui d'une application web de quiz qui permet aux utilisateu
    - **Attributs ARIA** : Ajoutez des attributs ARIA pour améliorer l'accessibilité pour les utilisateurs de technologies d'assistance.
    - **Navigation au clavier** : S'assurer que l'application peut être entièrement naviguée à l'aide d'un clavier.
 
----
-
-**Conclusion**
-
-Le code fourni démontre une base solide pour une application de quiz modulaire et dynamique. Il utilise efficacement les fonctionnalités modernes de JavaScript pour créer une expérience utilisateur interactive. La séparation des préoccupations, avec des modules dédiés aux variables, aux fonctions et aux données, rend la base de code maintenable et extensible.
-
-En prenant en compte les améliorations potentielles, telles que l'amélioration de la gestion des erreurs, l'optimisation de la structure du code et l'attention portée à l'expérience utilisateur, l'application peut être élevée au rang d'une plateforme plus robuste et plus conviviale.
 
 ---
 
@@ -223,30 +216,11 @@ En prenant en compte les améliorations potentielles, telles que l'amélioration
 - **Engagement de l'utilisateur** : Les minuteries, les barres de progression et les animations contribuent à rendre l'expérience de l'utilisateur attrayante.
 - **Personnalisation** : L'adaptation du contenu (questions, messages) en fonction des thèmes améliore la rejouabilité.
 
-Dans l'ensemble, l'application est un exemple louable de pratiques modernes de développement web, combinant efficacement la structure, la fonctionnalité et l'interaction avec l'utilisateur.
+Dans l'ensemble, l'application est un exemple de pratiques de développement web, combinant efficacement la structure, la fonctionnalité et l'interaction avec l'utilisateur.
 
 # Tutoriel : Gérer les données dans votre application de jeu-concours
 
 Ce tutoriel vous guidera dans le processus d'ajout ou de suppression de sujets (thèmes) et de questions dans votre application de quiz. À la fin de ce tutoriel, vous serez en mesure de personnaliser votre quiz pour inclure de nouveaux thèmes et questions, ou supprimer des thèmes et questions existants, afin d'adapter le contenu à vos besoins.
-
----
-
-## Table des matières
-
-1. [Comprendre la structure des données](#comprendre-la-structure-des-données)
-2. [Ajouter un nouveau thème](#adding-a-new-theme)
-   - Étape 1 : [Créer un nouveau fichier de données](#étape-1-créer-un-nouveau-fichier-de-données)
-   - Étape 2 : [Définissez vos questions](#étape-2-définissez-vos-questions)
-   - Étape 3 : [Mettre à jour la liste des thèmes](#étape-3-mettre-à-jour-la-liste-des-thèmes)
-   - Étape 4 : [Importer les questions du nouveau thème](#étape-4-importer-les-nouvelles-questions-du-thème)
-3. [Suppression d'un thème existant](#deleting-an-existing-theme)
-   - Étape 1 : [Supprimer le fichier de données du thème](#step-1-remove-themes-data-file)
-   - Étape 2 : [Mettre à jour la liste des thèmes](#step-2-update-the-list-of-the-themes)
-   - Étape 3 : [Supprimer les importations et les références](#step-3-remove-imports-and-references)
-4. [Ajouter des questions à un thème existant](#adding-questions-to-an-existing-theme)
-5. [Supprimer des questions d'un thème](#deleting-questions-from-a-theme)
-6. [Tester vos modifications](#testing-your-changes)
-7. [Conclusion](#conclusion)
 
 ---
 
@@ -586,10 +560,6 @@ Après avoir effectué les modifications, il est important de tester votre quiz 
 
 ---
 
-## Conclusion
-
-En suivant ce tutoriel, vous pouvez personnaliser votre application de quiz pour y inclure tous les sujets et toutes les questions que vous souhaitez. Cette flexibilité vous permet d'adapter le quiz à des publics spécifiques ou à des objectifs éducatifs.
-
 **Points clés à retenir** :
 
 - **Maintenir une structure de données cohérente** : Assurez-vous que tous les objets de question suivent le même format.
@@ -598,4 +568,8 @@ En suivant ce tutoriel, vous pouvez personnaliser votre application de quiz pour
 
 ---
 
-Bon codage et bonne personnalisation de votre application de quiz !
+**Conclusion**
+
+Le code fourni démontre une base solide pour une application de quiz modulaire et dynamique. Il utilise efficacement les fonctionnalités modernes de JavaScript pour créer une expérience utilisateur interactive. La séparation des préoccupations, avec des modules dédiés aux variables, aux fonctions et aux données, rend la base de code maintenable et extensible.
+
+En prenant en compte les améliorations potentielles, telles que l'amélioration de la gestion des erreurs, l'optimisation de la structure du code et l'attention portée à l'expérience utilisateur, l'application peut être élevée au rang d'une plateforme plus robuste et plus conviviale.
