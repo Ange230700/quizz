@@ -31,11 +31,7 @@ initialiserQuiz();
 
 /* =============== MANIPULATION DU DOM =============== */
 
-scoreDansHtml.innerHTML = `
-    <span>${variables.score}</span>
-    <div class="separator"></div>
-    <span>${variables.questionsThematiqueChoisie.length}</span>
-`;
+scoreDansHtml.innerText = `${variables.score} pts`;
 
 /* =============== GESTION DES ÉVÉNEMENTS =============== */
 
@@ -91,11 +87,7 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     // On remet le numéro de la question actuelle à 0
     variables.numeroQuestionActuelle = 0
 
-    scoreDansHtml.innerHTML = `
-        <span>${variables.score}</span>
-        <div class="separator"></div>
-        <span>${variables.questionsThematiqueChoisie.length}</span>
-    `;
+    scoreDansHtml.innerText = `${variables.score} pts`;
 
     // On cache le message de fin
     sectionDuMessageDeFinDansHtml.style.display = "none";
