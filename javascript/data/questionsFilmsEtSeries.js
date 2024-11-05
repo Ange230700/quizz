@@ -20,7 +20,7 @@ const questionsFilmsEtSeries = [
       image:"https://www.quizz.biz/uploads/quizz/1356435/mobile/11_27Zg7.webp"
    },
    {
-      texte: "Qui est le plus grand rival Sherlock Holmes ?",
+      texte: "Qui est le plus grand rival de Sherlock Holmes ?",
       tableauDeChoix: ["Mycroft Holmes", "John Watson", "James Moriarty", "Sherlock Holmes"],
       reponse: "James Moriarty",
       image:"https://images.pexels.com/photos/18951629/pexels-photo-18951629/free-photo-of-ville-gare-station-urbain.jpeg?auto=compress&cs=tinysrgb&w=600"
