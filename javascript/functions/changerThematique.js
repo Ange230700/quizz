@@ -6,10 +6,11 @@ import variables from "../variables.js";
 // import des questions
 import questionsFilmsEtSeries from '../data/questionsFilmsEtSeries.js';
 import questionsMusique from "../data/questionsMusique.js";
-import questionsTechnologie from "../data/questionsTechnologie.js";
-import questionsHistoire from "../data/questionsHistoire.js";
+import questionsHarryPotter from "../data/questionsHarryPotter.js";
+import questionsJeuxVideos from "../data/questionsJeuxVideos.js";
 import questionsCitations from "../data/questionsCitations.js";
 import questionsMarvel from "../data/questionsMarvel.js";
+import questionsDisney from "../data/questionsDisney.js";
 
 // import des éléments HTML
 import {
@@ -20,6 +21,7 @@ import {
 
 // import des fonctions
 import chargerLaQuestion from "./chargerLaQuestion.js";
+import demarrerLeTemps from "./demarrerLeTemps.js";
 
 function changerThematique(thematique) {
     // On change les questions en fonction de la thématique
@@ -30,17 +32,20 @@ function changerThematique(thematique) {
         case "musique":
             variables.questionsThematiqueChoisie = questionsMusique;
             break;
-        case "technologie":
-            variables.questionsThematiqueChoisie = questionsTechnologie;
-            break;
-        case "histoire":
-            variables.questionsThematiqueChoisie = questionsHistoire;
+        case "harry-potter":
+            variables.questionsThematiqueChoisie = questionsHarryPotter;
             break;
         case "citations":
             variables.questionsThematiqueChoisie = questionsCitations;
             break;
         case "marvel":
             variables.questionsThematiqueChoisie = questionsMarvel;
+            break;
+            case "disney":
+            variables.questionsThematiqueChoisie = questionsDisney;
+            break;
+            case "jeux-videos":
+            variables.questionsThematiqueChoisie = questionsJeuxVideos;
             break;
     }
 
@@ -62,6 +67,7 @@ function changerThematique(thematique) {
     questionDansHtml.style.display = "block";
 
     chargerLaQuestion();
+    demarrerLeTemps();
 }
 
 export default changerThematique;

@@ -10,12 +10,12 @@ const listeThematiques = [
         data_thematique: "musique",
     },
     {
-        nom: "Technologie",
-        data_thematique: "technologie",
+        nom: "Harry Potter",
+        data_thematique: "harry-potter",
     },
     {
-        nom: "Histoire",
-        data_thematique: "histoire",
+        nom: "Jeux Vidéos",
+        data_thematique: "jeux-videos",
     },
     {
         nom: "Citations",
@@ -24,6 +24,10 @@ const listeThematiques = [
     {
         nom: "Marvel",
         data_thematique: "marvel",
+    },
+    {
+        nom: "Disney",
+        data_thematique: "disney",
     },
 ];
 

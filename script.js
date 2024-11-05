@@ -1,4 +1,3 @@
-// script.js
 
 // import des variables pour les utiliser dans la logique du quiz
 import variables from "./javascript/variables.js";
