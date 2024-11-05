@@ -1,0 +1,16 @@
+#progressBar {
+  appearance:"none";/* supprime l'apparence par défaut */
+  width: 70%;
+  border-radius: 10px;/* rendre les coin arrondis */
+  background-color: rgb(216, 235, 228);/* couleur de fond (barre non rempli) */
+}
+
+progress::-webkit-progress-bar {
+  background-color: #dad9d8; /* Couleur de la barre de fond (grise) */
+  border-radius: 10px; /* Arrondir les coins de la barre de fond */
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(to right, #ed4912, #740590);
+  border-radius: 10px; /* Coins arrondis */
+}
