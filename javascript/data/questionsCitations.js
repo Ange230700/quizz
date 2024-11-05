@@ -1,3 +1,5 @@
+// javascript\data\questionsCitations.js
+
 const questionsCitations = [
     {
         texte: "« La vie, c'est comme une boîte de chocolats, on ne sait jamais sur quoi on va tomber. »",
