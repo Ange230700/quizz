@@ -570,6 +570,6 @@ Après avoir effectué les modifications, il est important de tester votre quiz 
 
 **Conclusion**
 
-Le code fourni démontre une base solide pour une application de quiz modulaire et dynamique. Il utilise efficacement les fonctionnalités modernes de JavaScript pour créer une expérience utilisateur interactive. La séparation des préoccupations, avec des modules dédiés aux variables, aux fonctions et aux données, rend la base de code maintenable et extensible.
+Le code fourni constitue une base solide pour une application de quiz modulaire et dynamique. Il utilise efficacement les fonctionnalités modernes de JavaScript pour créer une expérience utilisateur interactive. La séparation des éléments HTML récupérés dans Javascript, avec des modules dédiés aux variables, aux fonctions et aux données, rend la base de code maintenable et extensible.
 
-En prenant en compte les améliorations potentielles, telles que l'amélioration de la gestion des erreurs, l'optimisation de la structure du code et l'attention portée à l'expérience utilisateur, l'application peut être élevée au rang d'une plateforme plus robuste et plus conviviale.
+En prenant en compte les améliorations potentielles, telles que l'amélioration de la gestion des erreurs, l'optimisation de la structure du code et l'attention portée à l'expérience utilisateur, l'application peut être élevée au rang d'une plateforme plus robuste et performante.
