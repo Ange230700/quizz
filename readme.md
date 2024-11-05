@@ -334,7 +334,7 @@ Pour ajouter un nouveau thème à votre quiz, suivez les étapes suivantes :
 
 1. **Ouvrez la fonction de changement de thème :
 
-   ``plaintext
+   ```plaintext
    javascript/functions/changerThematique.js
    ```
 
@@ -389,7 +389,7 @@ Pour supprimer un thème de votre quiz, suivez les étapes suivantes :
 
 1. **Ouvrir le fichier de la liste des thèmes** :
 
-   ``plaintext
+   ```plaintext
    javascript/data/listeThematiques.js
    ```
 
@@ -417,7 +417,7 @@ Pour supprimer un thème de votre quiz, suivez les étapes suivantes :
 
 1. **Ouvrir la fonction de changement de thème** :
 
-   ``plaintext
+   ```plaintext
    javascript/functions/changerThematique.js
    ```
 
@@ -451,7 +451,7 @@ Pour ajouter de nouvelles questions à un thème existant :
 
    Par exemple, pour ajouter des questions à « Technologie » :
 
-   ``plaintext
+   ```plaintext
    javascript/data/questionsTechnologie.js
    ```
 
@@ -491,7 +491,7 @@ Pour supprimer des questions d'un thème :
 
    Par exemple :
 
-   ``plaintext
+   ```plaintext
    javascript/data/questionsHistoire.js
    ```
 
