@@ -1,3 +1,5 @@
+// javascript\data\questionsHistoire.js
+
 const questionsHistoire = [
     {
         texte: "En quelle année a eu lieu la Révolution française ?",

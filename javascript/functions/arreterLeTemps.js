@@ -1,3 +1,5 @@
+// javascript\functions\arreterLeTemps.js
+
 import variables from '../variables.js';
 
 function arreterLeTemps() {

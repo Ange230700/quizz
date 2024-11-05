@@ -1,3 +1,5 @@
+// javascript\functions\changerLeMessageDeFinEnFonctionDuScoreEtDeThematique.js
+
 // import des messages de fin
 import tousLesMessagesDeFin from "../data/tousLesMessagesDeFin.js";
 

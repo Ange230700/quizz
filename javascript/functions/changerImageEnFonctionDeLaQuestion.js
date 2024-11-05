@@ -1,3 +1,5 @@
+// javascript\functions\changerImageEnFonctionDeLaQuestion.js
+
 import variables from '../variables.js';
 
 function changerImageEnFonctionDeLaQuestion() {

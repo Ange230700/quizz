@@ -1,3 +1,5 @@
+// javascript\functions\activerBoutonThematiqueSelectionne.js
+
 function activerBoutonThematiqueSelectionne(boutonThematiqueSelectionne) {
     // on récupère les boutons thématiques dans le HTML
     const boutonsThematiquesDansHtml = document.querySelectorAll("#thematiques button");

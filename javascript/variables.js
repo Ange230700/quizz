@@ -1,3 +1,5 @@
+// javascript\variables.js
+
 // on importe les questions de la thématique active par défaut
 import questionsFilmsEtSeries from "./data/questionsFilmsEtSeries.js";
 

@@ -1,3 +1,5 @@
+// javascript\functions\creerBoutonsThematiquesDansHtml.js
+
 // import de la liste des thématiques
 import listeThematiques from "../data/listeThematiques.js";
 

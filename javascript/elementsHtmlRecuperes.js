@@ -1,3 +1,5 @@
+// javascript\elementsHtmlRecuperes.js
+
 // on récupère le titre h1 dont l'attribut classe est 'question' dans le HTML
 const questionDansHtml = document.querySelector(".question");
 

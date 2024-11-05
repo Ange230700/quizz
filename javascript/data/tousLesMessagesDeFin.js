@@ -1,3 +1,5 @@
+// javascript\data\tousLesMessagesDeFin.js
+
 const tousLesMessagesDeFin = {
     "films-et-series": {
         perfect: "Bravo! T'es un boss des séries!",

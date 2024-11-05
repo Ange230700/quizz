@@ -1,3 +1,5 @@
+// javascript\functions\verifierBonneReponse.js
+
 import variables from '../variables.js';
 
 function verifierBonneReponse(reponseJoueur) {

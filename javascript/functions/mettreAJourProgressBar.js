@@ -1,3 +1,5 @@
+// javascript\functions\mettreAJourProgressBar.js
+
 // import des variables
 import variables from '../variables.js';
 

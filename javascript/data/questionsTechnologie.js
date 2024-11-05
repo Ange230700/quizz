@@ -1,3 +1,5 @@
+// javascript\data\questionsTechnologie.js
+
 const questionsTechnologie = [
     {
         texte: "Quel est le nom du fondateur de Microsoft ?",

@@ -1,5 +1,7 @@
 // javascript\functions\desactiverLesBoutonsOptions.js
 
+// javascript\functions\desactiverLesBoutonsOptions.js
+
 function desactiverLesBoutonsOptions() {
     // On récupère tous les boutons options
     const boutonOptionsDansHtml = document.querySelectorAll(".option");
