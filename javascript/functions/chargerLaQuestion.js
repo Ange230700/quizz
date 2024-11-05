@@ -31,7 +31,7 @@ function chargerLaQuestion() {
     questionDansHtml.innerText = questionActuelle.texte;
 
     // on injecte le nombre de question dans le HTML
-    numeroQuestionDansHtml.innerText = `Question ${variables.numeroQuestionActuelle + 1}`;
+    numeroQuestionDansHtml.innerText = `Question ${variables.numeroQuestionActuelle + 1} / ${variables.questionsThematiqueChoisie.length}`;
 
     // Appelle la fonction pour changer l'image en fonction de la question
     changerImageEnFonctionDeLaQuestion();
@@ -80,11 +80,7 @@ function chargerLaQuestion() {
                 // on désactive le bouton suivant
                 boutonSuivantDansHtml.disabled = false;
 
-                scoreDansHtml.innerHTML = `
-                    <span>${variables.score}</span>
-                    <div class="separator"></div>
-                    <span>${variables.questionsThematiqueChoisie.length}</span>
-                `;
+                scoreDansHtml.innerText = `${variables.score} pts`;
 
                 // Ajoute la coche ✔️
                 boutonDansHtml.innerHTML = `<span class="coche">✔️</span> ${choix}`;
@@ -92,11 +88,7 @@ function chargerLaQuestion() {
             } else {
                 boutonDansHtml.innerHTML = `<span class="croix-style">❌</span> ${choix}`;
 
-                scoreDansHtml.innerHTML = `
-                    <span>${variables.score}</span>
-                    <div class="separator"></div>
-                    <span>${variables.questionsThematiqueChoisie.length}</span>
-                `;
+                scoreDansHtml.innerText = `${variables.score} pts`;
 
                 // On active le bouton suivant
                 boutonSuivantDansHtml.disabled = false;

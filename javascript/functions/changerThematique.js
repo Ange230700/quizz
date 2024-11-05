@@ -55,12 +55,7 @@ function changerThematique(thematique) {
     // On remet le variables.score à 0
     variables.score = 0;
     variables.tempsRestant = 15; // Réinitialiser le temps restant
-    scoreDansHtml.innerHTML = `
-        <span>${variables.score}</span>
-        <div class="separator"></div>
-        <span>${variables.questionsThematiqueChoisie.length}</span>
-    `;
-
+    scoreDansHtml.innerText = `${variables.score} pts`;
     // On cache le message de fin
     sectionDuMessageDeFinDansHtml.style.display = "none";
 

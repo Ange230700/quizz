@@ -9,11 +9,7 @@ import {
 } from '../elementsHtmlRecuperes.js';
 
 function mettreAJourScore() {
-    scoreDansHtml.innerHTML = `
-        <span>${variables.score}</span>
-        <div class="separator"></div>
-        <span>${variables.questionsThematiqueChoisie.length}</span>
-    `;
+    scoreDansHtml.innerText = `${variables.score} pts`;
 }
 
 export default mettreAJourScore;
