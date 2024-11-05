@@ -20,8 +20,8 @@ import {
 } from "../elementsHtmlRecuperes.js";
 
 // import des fonctions
-import chargerLaQuestion from "./chargerLaQuestion.js";
-import demarrerLeTemps from "./demarrerLeTemps.js";
+import initialiserQuiz from "./initialiserQuiz.js";
+
 
 function changerThematique(thematique) {
     // On change les questions en fonction de la thématique
@@ -53,7 +53,8 @@ function changerThematique(thematique) {
     variables.numeroQuestionActuelle = 0
 
     // On remet le variables.score à 0
-    variables.score = 0
+    variables.score = 0;
+    variables.tempsRestant = 15; // Réinitialiser le temps restant
     scoreDansHtml.innerHTML = `
         <span>${variables.score}</span>
         <div class="separator"></div>
@@ -66,8 +67,7 @@ function changerThematique(thematique) {
     // On affiche la question
     questionDansHtml.style.display = "block";
 
-    chargerLaQuestion();
-    demarrerLeTemps();
+    initialiserQuiz();
 }
 
 export default changerThematique;

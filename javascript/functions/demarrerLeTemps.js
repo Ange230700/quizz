@@ -8,45 +8,47 @@ import desactiverLesBoutonsOptions from "./desactiverLesBoutonsOptions.js";
 
 // import des éléments HTML récupérés
 import {
-    timeurDansHtml,
-    boutonSuivantDansHtml
+  timeurDansHtml,
+  boutonSuivantDansHtml,
 } from "../elementsHtmlRecuperes.js";
 
 function demarrerLeTemps() {
-    if (variables.timer) return;
+  if (variables.timer) return;
 
-    // initialise le temps
-    variables.tempsRestant = 15
+  // Initialise le temps
+  variables.tempsRestant = 15;
 
-    // affiche le temps restant
-    timeurDansHtml.innerHTML = `
-        <p>${variables.tempsRestant}</p>
-    `;
+  // Initialise le temps
+  variables.tempsRestant = 15;
 
-    // démarre le compte à rebours
-    variables.timer = setInterval(() => {
-        // décrémente le temps restant
-        variables.tempsRestant--
+  // Affiche immédiatement le temps restant
+  timeurDansHtml.innerHTML = `<p>${variables.tempsRestant}</p>`;
 
-        // affiche le temps restant
-        timeurDansHtml.innerHTML = `
-            <p>${variables.tempsRestant}</p>
-        `;
+  // Démarre le compte à rebours immédiatement
+  variables.timer = setInterval(() => {
+    // Met à jour l'affichage avant la décrémentation
+    timeurDansHtml.innerHTML = `<p>${variables.tempsRestant}</p>`;
 
-        // si le temps restant est écoulé, on arrête le temps
-        if (variables.tempsRestant <= 0) {
-            clearInterval(variables.timer)
-            timeurDansHtml.innerHTML = `
+    // Décrémente le temps restant
+    variables.tempsRestant--;
+
+    // Si le temps restant est écoulé, on arrête le temps
+    if (variables.tempsRestant <= 0) {
+      clearInterval(variables.timer);
+      variables.timer = null;
+
+      // Affiche 0 quand le temps est écoulé
+      timeurDansHtml.innerHTML = `
                 <p>0</p>
             `;
 
-            // on désactive les boutons d'options
-            desactiverLesBoutonsOptions()
+      // Désactive les boutons d'options
+      desactiverLesBoutonsOptions();
 
-            // on active le bouton suivant
-            boutonSuivantDansHtml.disabled = false
-        }
-    }, 1000)
+      // Active le bouton suivant
+      boutonSuivantDansHtml.disabled = false;
+    }
+  }, 1000);
 }
 
 export default demarrerLeTemps;
