@@ -1,6 +1,6 @@
 <!-- readme.md -->
 
-**Aperçu**
+**Vue d'ensemble du projet**
 
 Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre à des questions sur différents thèmes. L'application est construite à l'aide de HTML, CSS et JavaScript. Elle comporte un chargement dynamique des questions, un suivi des scores, une barre de progression et un message de fin de quiz basé sur les performances de l'utilisateur.
 
@@ -13,13 +13,13 @@ Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre
    - **Structure** : Le fichier HTML définit la structure de base de l'application de quiz, y compris la barre de progression, l'en-tête, la section principale du quiz et la navigation pour la sélection du thème.
    - **Éléments** :
      - **Barre de progression** : Indique la progression de l'utilisateur dans le quiz.
-     - **Header** : Contient la navigation pour les thèmes, un bouton de mise à jour et l'affichage du score.
+     - **Header** : Contient la navigation d'un thème à l'autre, un bouton de mise à jour et l'affichage du score.
      - **Section principale** : Affiche le minuteur, l'image de la question, le texte de la question, les options et les boutons de navigation (« Suivant » pour passer à la question suivante et « Rejouer » pour refaire le questionnaire).
 
-2. **Scripts principaux (`script.js`)**
+2. **Script principal (`script.js`)**
 
    - **Imports** :
-     - **Variables** : Variables centralisées utilisées dans l'ensemble de l'application.
+     - **Variables** : Variables d'état du quiz centralisées utilisées dans l'ensemble de l'application.
      - **Éléments HTML** : Références aux éléments DOM qui sont manipulés.
      - **Fonctions** : Fonctions modulaires gérant des tâches spécifiques au sein de la logique du quiz.
    - **Initialisation** :
@@ -28,7 +28,7 @@ Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre
      - Initialise le quiz en chargeant la première question.
    - **Gestion des événements** :
      - **Bouton suivant** : Passe à la question suivante ou affiche le message de fin de quiz.
-     - **Bouton de relecture** : Réinitialise le quiz pour permettre à l'utilisateur de rejouer.
+     - **Bouton pour rejouer** : Réinitialise le quiz pour permettre à l'utilisateur de rejouer.
 
 3. **Variables (`variables.js`)**
 
@@ -129,10 +129,9 @@ Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre
 - Le quiz prend en charge plusieurs thèmes, chacun avec son propre ensemble de questions :
   - **Films et Séries**
   - **Musique**
-  - **Technologie**
-  - **Histoire**
   - **Citations**
   - **Marvel**
+   - **...**
 - Les questions sont stockées dans des fichiers de données distincts correspondant à chaque thème.
 - Les messages de fin de question sont personnalisés pour chaque thème et chaque niveau de performance.
 
@@ -148,8 +147,8 @@ Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre
 
 2. **Gestion des variables**
 
-   - Variables centralisées** : Les variables clés sont stockées dans un seul fichier `variables.js`, ce qui facilite le suivi et la gestion de l'état de l'application.
-   - Gestion de l'état** : L'état de l'application (question en cours, score, timer) est géré efficacement par l'objet `variables`.
+   - **Variables centralisées** : Les variables clés sont stockées dans un seul fichier `variables.js`, ce qui facilite le suivi et la gestion de l'état de l'application.
+   - **Gestion de l'état** : L'état de l'application (question en cours, score, timer) est géré efficacement par l'objet `variables`.
 
 3. **Gestion des événements**
 
@@ -185,30 +184,9 @@ Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre
    - **Validation des entrées** : S'assurer que les données (par exemple, les questions, les images) sont valides et gérer les cas où les données peuvent être manquantes ou mal formées.
    - **Opérations asynchrones** : Si les images sont chargées à partir d'URL externes, mettre en œuvre une gestion des erreurs en cas d'échec des requêtes réseau.
 
-3. **Expérience utilisateur**
-
-   - **Conception réactive** : S'assurer que l'interface utilisateur est réactive et accessible sur différents appareils et tailles d'écran.
-   - **Mécanismes de rétroaction** : Fournir un retour d'information immédiat pour les réponses correctes ou incorrectes au-delà de la simple mise à jour du score (par exemple, mettre en évidence les réponses correctes après la sélection).
-
-4. **Optimisation du code**
-
-   - **Refactoring** : Certaines fonctions pourraient être remaniées pour plus de clarté et d'efficacité, par exemple en combinant des fonctions similaires ou en simplifiant la logique.
-   - **Utilisation de classes** : Envisagez d'utiliser des classes ES6 pour encapsuler la fonctionnalité des quiz, ce qui peut améliorer l'organisation du code.
-
-5. **Évolutivité**
-
-   - **Gestion des thèmes** : Au fur et à mesure que le nombre de thèmes augmente, mettez en place un système pour gérer les thèmes et les questions plus efficacement.
-   - **Localisation** : Si vous visez un public plus large, envisagez d'ajouter la prise en charge de plusieurs langues.
-
-6. **Accessibilité**
-
-   - **Attributs ARIA** : Ajoutez des attributs ARIA pour améliorer l'accessibilité pour les utilisateurs de technologies d'assistance.
-   - **Navigation au clavier** : S'assurer que l'application peut être entièrement naviguée à l'aide d'un clavier.
-
-
 ---
 
-**Principaux enseignements**
+**Principales notions à retenir**
 
 - **Conception modulaire** : L'utilisation des modules ES6 favorise une organisation propre du code.
 - **Mises à jour dynamiques de l'interface utilisateur** : L'interactivité est améliorée par la manipulation dynamique du DOM.
@@ -217,6 +195,8 @@ Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre
 - **Personnalisation** : L'adaptation du contenu (questions, messages) en fonction des thèmes améliore la rejouabilité.
 
 Dans l'ensemble, l'application est un exemple de pratiques de développement web, combinant efficacement la structure, la fonctionnalité et l'interaction avec l'utilisateur.
+
+---
 
 # Tutoriel : Gérer les données dans votre application de jeu-concours
 
@@ -231,14 +211,14 @@ Avant d'effectuer des modifications, il est important de comprendre comment les 
 - **Thèmes (sujets)** : Chaque thème possède son propre fichier de données contenant un tableau d'objets questions.
 - **Structure de l'objet question** :
 
-  ```javascript
-  {
-    texte: "Question text here",
-    tableauDeChoix: ["Option 1", "Option 2", "Option 3", "Option 4"],
-    reponse: "Correct Answer",
-    image: "path/to/image.jpg"
-  }
-  ```
+   ```javascript
+   {
+      texte: "Intitulé de la question",
+      tableauDeChoix: ["Option 1", "Option 2", "Option 3", "Option 4"],
+      reponse: "Réponse correcte",
+      image: "Chemin/vers/image.jpg"
+   }
+   ```
 
 - **L'emplacement des fichiers de données** : Tous les fichiers de données sont situés dans le répertoire `javascript/data/`.
 - **Liste des thèmes** : La liste des thèmes disponibles est gérée dans `javascript/data/listeThematiques.js`.
@@ -560,16 +540,8 @@ Après avoir effectué les modifications, il est important de tester votre quiz 
 
 ---
 
-**Points clés à retenir** :
-
-- **Maintenir une structure de données cohérente** : Assurez-vous que tous les objets de question suivent le même format.
-- **Mettez à jour toutes les références** : Lorsque vous ajoutez ou supprimez des thèmes, mettez à jour tous les fichiers pertinents (`listeThematiques.js`, imports, switch cases).
-- **Testez minutieusement** : Testez toujours votre application après avoir effectué des modifications afin de détecter rapidement toute erreur.
-
----
-
 **Conclusion**
 
-Le code fourni constitue une base solide pour une application de quiz modulaire et dynamique. Il utilise efficacement les fonctionnalités modernes de JavaScript pour créer une expérience utilisateur interactive. La séparation des éléments HTML récupérés dans Javascript, avec des modules dédiés aux variables, aux fonctions et aux données, rend la base de code maintenable et extensible.
+Le code constitue une base solide pour une application de quiz modulaire et dynamique. Il utilise efficacement les fonctionnalités de JavaScript pour créer une expérience utilisateur interactive. La séparation des éléments HTML récupérés dans Javascript, des modules dédiés aux variables, des fonctions et des données, rend la base de code _maintenable_ et _extensible_.
 
-En prenant en compte les améliorations potentielles, telles que l'amélioration de la gestion des erreurs, l'optimisation de la structure du code et l'attention portée à l'expérience utilisateur, l'application peut être élevée au rang d'une plateforme plus robuste et performante.
+En prenant en compte les améliorations potentielles évoquées plus haut, telles que l'amélioration de la gestion des erreurs, l'optimisation de la structure du code et l'attention portée à l'expérience utilisateur, l'application peut être élevée au rang d'une plateforme plus robuste et performante.
