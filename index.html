@@ -1,3 +1,5 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -5,18 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz</title>
     <link rel="stylesheet" href="style.css" />
-
     <script defer type="module" src="script.js"></script>
   </head>
-  <body>
-    <main id="section-quiz">
-      <h1 class="question"></h1>
 
-      <section class="options">
+  <body>
+    <progress id="progressBar" value="0" max="100"></progress>
+    <header id="header">
+      <nav id="thematiques"></nav>
+      <section class="conteneur-score">
+        <h1 id="score"></h1>
       </section>
+    </header>
+    <main id="section-quiz">
+      <section class="conteneur-temps">
+        <div id="timer"></div>
+      </section>
+      <section class="numero-question">
+      </section>
+      <img class="test" src="images/cinema-test.jpg" alt="cinema" />
+      <section class="images-questions">
+        <h1 class="question"></h1>
+      </section>
+      <section id="message-de-fin-de-quiz" style="display: none"></section>
+      <section class="options"></section>
       <section class="section-bouton">
-        <button class="bouton-clique-en-bas-a-droite" id="bouton-suivant">Suivant</button>
-        <button class="bouton-clique-en-bas-a-droite" id="bouton-rejouer" style="display: none;">Rejouer</button>
+        <button class="bouton-clique-en-bas-a-droite" id="bouton-suivant">
+          Suivant
+        </button>
+        <button
+          class="bouton-clique-en-bas-a-droite"
+          id="bouton-rejouer"
+          style="display: none"
+        >
+          Rejouer
+        </button>
       </section>
     </main>
   </body>

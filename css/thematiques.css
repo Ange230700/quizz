@@ -1,0 +1,39 @@
+/* css\thematiques.css */
+
+#thematiques {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5vw;
+  margin-bottom: 20px;
+  width: 68%;
+}
+
+#thematiques button {
+  padding: 8px 16px;
+  border-radius: 5px;
+  background: #23074d;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.5s;
+  transition-property: background-color;
+}
+
+#thematiques button:hover {
+  background: #cc5333;
+}
+
+#thematiques button.active {
+  background: #cc5333;
+}
+
+#message-de-fin-de-quiz {
+  margin-top: 5vh;
+  padding: 2vh;
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+  background: transparent;
+  border-radius: 10px;
+  display: none;
+}
