@@ -3,11 +3,13 @@
 import listeThematiques from './javascript/listeThematiques.js';
 import questionsFilmsEtSeries from './javascript/questionsFilmsEtSeries.js';
 import questionsMusique from "./javascript/questionsMusique.js";
-import questionsTechnologie from "./javascript/questionsTechnologie.js";
-import questionsHistoire from "./javascript/questionsHistoire.js";
+import questionsHarryPotter from "./javascript/questionsHarryPotter.js";
+import questionsJeuxVideos from "./javascript/questionsJeuxVideos.js";
 import questionsCitations from "./javascript/questionsCitations.js";
 import questionsMarvel from "./javascript/questionsMarvel.js";
+import questionsDisney from "./javascript/questionsDisney.js";
 import tousLesMessagesDeFin from "./javascript/tousLesMessagesDeFin.js";
+
 
 /* ===== DECLARATION DE VARIABLES POUR LA LOGIQUE ===== */
 
@@ -173,17 +175,20 @@ function changerThematique(thematique) {
         case "musique":
             questionsThematiqueChoisie = questionsMusique;
             break;
-        case "technologie":
-            questionsThematiqueChoisie = questionsTechnologie;
-            break;
-        case "histoire":
-            questionsThematiqueChoisie = questionsHistoire;
+        case "harry-potter":
+            questionsThematiqueChoisie = questionsHarryPotter;
             break;
         case "citations":
             questionsThematiqueChoisie = questionsCitations;
             break;
         case "marvel":
             questionsThematiqueChoisie = questionsMarvel;
+            break;
+            case "disney":
+            questionsThematiqueChoisie = questionsDisney;
+            break;
+            case "jeux-videos":
+            questionsThematiqueChoisie = questionsJeuxVideos;
             break;
     }
 
