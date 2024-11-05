@@ -1,0 +1,131 @@
+#section-quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 0 2vh;
+  width: 70vw;
+  gap: 2vh;
+}
+.options {
+  width: 55%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.question {
+  font-family: "Urbanist", sans-serif;
+}
+
+.section-bouton {
+  align-self: end;
+}
+
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 48%;
+}
+
+.option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition-behavior: normal, normal, normal;
+  transition-duration: 0.3s, 0.2s, 0.2s;
+  transition-timing-function: ease, ease, ease;
+  transition-property: color, transform, box-shadow;
+  background-color: #cc5333;
+  color: #ffffff;
+}
+
+.option:disabled {
+  background: #ffffff;
+  color: #23074d;
+  cursor: not-allowed;
+}
+
+.bouton-clique-en-bas-a-droite {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  background: #23074d;
+  color: #ffffff;
+}
+
+#bouton-suivant:disabled {
+  background: #888787;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+
+#timer {
+  justify-content: left;
+}
+
+.test {
+  width: 30vh;
+  height: 30vh;
+  border-radius: 50%;
+  /* border: 5px solid #ffffff; Bordure personnalisable */
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+.images-questions {
+  display: flex;
+  justify-content: space-between; /* Espacement égal entre chaque élément */
+  gap: 20px; /* Ajoute un espacement fixe entre les éléments */
+}
+
+.coche {
+  margin-right: 8px; /* Espace entre la coche et le texte */
+  vertical-align: middle; /* Aligne verticalement avec le texte */
+}
+
+@keyframes clignote {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.clignotant {
+  animation: clignote 0.5s linear 2; /* 0.5s durée, 2 fois */
+}
+
+.conteneur-temps {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+  
+
+#timer {
+  shape-outside: circle(300%) border-box;
+  background-color: #23074d;
+  color:  #fcfbfa;
+  border-radius: 50% ;
+  border: #ffffff 2px solid;
+  width: 100px;
+  height: 100px;
+  font-size: 3em;
+  font-weight: bold;
+  /* text-align: center; */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}

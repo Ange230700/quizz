@@ -1,156 +1,99 @@
-// on importe le tableau de questions depuis questions.js
-import questions from './questions.js';
 
-let numeroQuestionActuelle = 0;
+// import des variables pour les utiliser dans la logique du quiz
+import variables from "./javascript/variables.js";
 
-let score = 0
+// import des éléments HTML récupérés
+import {
+    questionDansHtml,
+    sectionDesOptionsDansHtml,
+    boutonSuivantDansHtml,
+    boutonRejouerDansHtml,
+    scoreDansHtml,
+    sectionDuMessageDeFinDansHtml,
+    imageQuestionDansHtml,
+    progressBar
+} from "./javascript/elementsHtmlRecuperes.js";
 
-/* ======= RECUPERATION ELEMENTS HTML ======= */
-
-// on récupère les éléments HTML pour la question 
-const questionDansHtml = document.querySelector(".question");
-
-//on récupère les éléments HTML pour les options
-const sectionDesOptionsDansHtml = document.querySelector(".options");
-
-// on récupère les éléments HTML pour le bouton suivant
-const boutonSuivantDansHtml = document.querySelector("#bouton-suivant");
-
-// on récupère le bouton rejouer dans le HTML
-const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
-
-//on récupère l'element HTML de l'id de score
-const scoreDansHtml = document.querySelector("#score");
-scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
-
-/* ==================================== */
-
-/* =============== FONCTIONS =============== */
-
-function desactiverLesBoutonsOptions() {
-    const boutonOptionsDansHtml = document.querySelectorAll(".option");
-
-    boutonOptionsDansHtml.forEach((bouton) => {
-        bouton.disabled = true;
-    });
-}
-
-function verifierBonneReponse(reponseJoueur) {
-    const bonneReponseDeQuestionActuelle = questions[numeroQuestionActuelle].reponse;
-
-    if (reponseJoueur === bonneReponseDeQuestionActuelle) {
-        score = score + 1;
-        return true;
-    } else {
-        return false
-    }
-}
+// import des fonctions
+import chargerLaQuestion from "./javascript/functions/chargerLaQuestion.js";
+import mettreAJourScore from "./javascript/functions/mettreAJourScore.js";
+import changerLeMessageDeFinEnFonctionDuScoreEtDeThematique from "./javascript/functions/changerLeMessageDeFinEnFonctionDuScoreEtDeThematique.js";
+import creerBoutonsThematiquesDansHtml from "./javascript/functions/creerBoutonsThematiquesDansHtml.js";
+import mettreAJourProgressBar from "./javascript/functions/mettreAJourProgressBar.js";
+import initialiserQuiz from "./javascript/functions/initialiserQuiz.js";
+//import changerImageEnFonctionDeLaQuestion from "./javascript/functions/changerImageEnFonctionDeLaQuestion.js";
 
 
+// Appel des fonctions
+mettreAJourScore();
+creerBoutonsThematiquesDansHtml();
+initialiserQuiz();
 
-function chargerLaQuestion() {
-    //on vide la section des options dans HTML
-    sectionDesOptionsDansHtml.innerHTML = "";
+/* =============== MANIPULATION DU DOM =============== */
 
-    // on récupère la question actuelle
-    const questionActuelle = questions[numeroQuestionActuelle];
-
-    //on injecte la question actuelle dans le HTML
-    questionDansHtml.innerText = questionActuelle.texte;
-
-    //on injecte les choix dans le tableau de choix de la question actuelle dans le HTML
-    questionActuelle.tableauDeChoix.forEach((choix) => {
-        // on crée un bouton pour chaque option dans le HTML
-        const boutonDansHtml = document.createElement("button");
-
-        // on affiche le texte de tableau de choix dans la section de classe options HTML
-        boutonDansHtml.innerText = choix;
-
-        // on ajoute une classe option du CSS à chaque bouton
-        boutonDansHtml.classList.add("option");
-
-        // on ajoute chaque bouton à la section des options dans le HTML
-        sectionDesOptionsDansHtml.appendChild(boutonDansHtml);
-
-
-        // on ajoute un événement click à chaque bouton
-        boutonDansHtml.addEventListener("click", () => {
-            desactiverLesBoutonsOptions();
-            if (verifierBonneReponse(boutonDansHtml.innerText) === true) {
-                boutonDansHtml.style.backgroundColor = "green";
-                boutonDansHtml.style.color = "white";
-                boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
-
-            } else {
-                boutonDansHtml.style.backgroundColor = "red";
-                boutonDansHtml.style.color = "white";
-                boutonSuivantDansHtml.disabled = false;
-                scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
-            }
-        });
-    });
-
-
-    // on désactive le bouton suivant
-    boutonSuivantDansHtml.disabled = true;
-}
-
-chargerLaQuestion();
-
-function changerLeMessageEnFonctionDuScore() {
-    if (score === questions.length) {
-        questionDansHtml.innerText = "Bravo! T'es un boss des séries!";
-    } else if (score > (3 * questions.length) / 4) {
-        questionDansHtml.innerText = "Excellent ! Tu maîtrises vraiment bien tes séries !";
-    } else if (score > questions.length / 2) {
-        questionDansHtml.innerText = "Pas mal ! Tu connais bien tes séries !";
-    } else if (score > 0) {
-        questionDansHtml.innerText = "Pas encore ça, mais tu as de bonnes bases !";
-    } else {
-        questionDansHtml.innerText = "Tu devrais regarder plus de séries !";
-    }
-    return questionDansHtml.innerText;
-}
-
-
-
-
-/* ============================================== */
+scoreDansHtml.innerText = `${variables.score} pts`;
 
 /* =============== GESTION DES ÉVÉNEMENTS =============== */
 
 // on ajoute un événement click au bouton suivant
 boutonSuivantDansHtml.addEventListener("click", () => {
     // On incrémente le numéro de la question actuelle
-    numeroQuestionActuelle = numeroQuestionActuelle + 1;
+    variables.numeroQuestionActuelle = variables.numeroQuestionActuelle + 1;
 
     // On vérifie si il reste des questions
-    if (numeroQuestionActuelle < questions.length) {
+    if (variables.numeroQuestionActuelle < variables.questionsThematiqueChoisie.length) {
         // On charge la question
         chargerLaQuestion();
+
+        // On met à jour la barre de progression
+        mettreAJourProgressBar();
+
+        
+    // // Appelle la fonction pour changer l'image en fonction de la question
+    // changerImageEnFonctionDeLaQuestion();
+
     } else {
-        // S'il y a plus de questions, on indique que le quiz est terminé
-        questionDansHtml.innerText = changerLeMessageEnFonctionDuScore();
+        // On met à jour la barre de progression
+        mettreAJourProgressBar();
+
+        // On change le message de fin en fonction du score
+        changerLeMessageDeFinEnFonctionDuScoreEtDeThematique();
 
         //on vide la section des options dans HTML
         sectionDesOptionsDansHtml.innerHTML = "";
 
-        // // on cache le bouton suivant
+        // on cache la question
+        questionDansHtml.style.display = "none";
+
+        // on cache le bouton suivant
         boutonSuivantDansHtml.style.display = "none";
 
         // on affiche le bouton rejouer
         boutonRejouerDansHtml.style.display = "inline-block";
+
+        // Masque l'image de la question
+        imageQuestionDansHtml.style.display = "none";
     }
-})
+});
 
 // on ajoute un événement click au bouton rejouer
 boutonRejouerDansHtml.addEventListener("click", () => {
     // On remet le score à 0
-    score = 0
-    scoreDansHtml.innerText = `Score: ${score} / ${questions.length}`;
+    variables.score = 0
+
+    // On remet la barre de progression à 0
+    progressBar.value = 0;
+
     // On remet le numéro de la question actuelle à 0
-    numeroQuestionActuelle = 0
+    variables.numeroQuestionActuelle = 0
+
+    scoreDansHtml.innerText = `${variables.score} pts`;
+
+    // On cache le message de fin
+    sectionDuMessageDeFinDansHtml.style.display = "none";
+
+    // On affiche la question
+    questionDansHtml.style.display = "block";
 
     // On cache le bouton rejouer
     boutonRejouerDansHtml.style.display = "none";
@@ -159,7 +102,5 @@ boutonRejouerDansHtml.addEventListener("click", () => {
     boutonSuivantDansHtml.style.display = "inline-block";
 
     // On charge la question
-    chargerLaQuestion();
-})
-
-/* ===================================================== */
+    initialiserQuiz();
+});
