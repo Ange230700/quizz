@@ -14,7 +14,7 @@ const questionsCitations = [
         image:"https://cdn.pixabay.com/photo/2022/01/27/17/51/titanic-6972725_1280.jpg"
     },
     {
-        texte: "Qui a dit : « Je pense, donc je suis ? »",
+        texte: "Qui a dit : « Je pense, donc je suis » ?",
         tableauDeChoix: ["Aristote", "Descartes", "Platon", "Socrate"],
         reponse: "Descartes",
         image:"https://media.istockphoto.com/id/878626144/fr/photo/%C3%A0-percevoir.jpg?s=2048x2048&w=is&k=20&c=3MlkdUOJaFFE-cQWMy1AKdE8pc5djRxBVCqquMOmb3w="
