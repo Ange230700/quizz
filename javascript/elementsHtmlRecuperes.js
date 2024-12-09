@@ -16,13 +16,16 @@ const boutonRejouerDansHtml = document.querySelector("#bouton-rejouer");
 const scoreDansHtml = document.querySelector("#score");
 
 // on récupère l'élément html du timer
-const timeurDansHtml = document.querySelector("#timer")
+const timeurDansHtml = document.querySelector("#timer");
 
 // on récupère la section des boutons thématiques dans le HTML
-const sectionDesBoutonsThematiquesDansHtml = document.querySelector("#thematiques");
+const sectionDesBoutonsThematiquesDansHtml =
+  document.querySelector("#thematiques");
 
 // on récupère la section du message de fin dans le HTML
-const sectionDuMessageDeFinDansHtml = document.querySelector("#message-de-fin-de-quiz");
+const sectionDuMessageDeFinDansHtml = document.querySelector(
+  "#message-de-fin-de-quiz",
+);
 
 // on récupère l'image de la question dont l'attribut classe est 'test' dans le HTML
 const imageQuestionDansHtml = document.querySelector(".test");
@@ -34,15 +37,15 @@ const progressBar = document.querySelector("#progressBar");
 const numeroQuestionDansHtml = document.querySelector(".numero-question");
 
 export {
-    questionDansHtml,
-    sectionDesOptionsDansHtml,
-    boutonSuivantDansHtml,
-    boutonRejouerDansHtml,
-    scoreDansHtml,
-    timeurDansHtml,
-    sectionDesBoutonsThematiquesDansHtml,
-    sectionDuMessageDeFinDansHtml,
-    imageQuestionDansHtml,
-    progressBar,
-    numeroQuestionDansHtml
+  questionDansHtml,
+  sectionDesOptionsDansHtml,
+  boutonSuivantDansHtml,
+  boutonRejouerDansHtml,
+  scoreDansHtml,
+  timeurDansHtml,
+  sectionDesBoutonsThematiquesDansHtml,
+  sectionDuMessageDeFinDansHtml,
+  imageQuestionDansHtml,
+  progressBar,
+  numeroQuestionDansHtml,
 };

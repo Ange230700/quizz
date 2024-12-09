@@ -17,16 +17,8 @@ body {
   font-family: "Poppins", sans-serif;
   color: #ffffff;
   background: #23074d; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to left,
-    #cc5333,
-    #23074d
-  );
-  background: linear-gradient(
-    to left,
-    #cc5333,
-    #23074d
-  );
+  background: -webkit-linear-gradient(to left, #cc5333, #23074d);
+  background: linear-gradient(to left, #cc5333, #23074d);
 
   display: flex;
   flex-direction: column;

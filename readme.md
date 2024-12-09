@@ -131,7 +131,7 @@ Il s'agit d'une application web de quiz qui permet aux utilisateurs de répondre
   - **Musique**
   - **Citations**
   - **Marvel**
-   - **...**
+  - **...**
 - Les questions sont stockées dans des fichiers de données distincts correspondant à chaque thème.
 - Les messages de fin de question sont personnalisés pour chaque thème et chaque niveau de performance.
 
@@ -211,14 +211,14 @@ Avant d'effectuer des modifications, il est important de comprendre comment les 
 - **Thèmes (sujets)** : Chaque thème possède son propre fichier de données contenant un tableau d'objets questions.
 - **Structure de l'objet question** :
 
-   ```javascript
-   {
-      texte: "Intitulé de la question",
-      tableauDeChoix: ["Option 1", "Option 2", "Option 3", "Option 4"],
-      reponse: "Réponse correcte",
-      image: "Chemin/vers/image.jpg"
-   }
-   ```
+  ```javascript
+  {
+     texte: "Intitulé de la question",
+     tableauDeChoix: ["Option 1", "Option 2", "Option 3", "Option 4"],
+     reponse: "Réponse correcte",
+     image: "Chemin/vers/image.jpg"
+  }
+  ```
 
 - **L'emplacement des fichiers de données** : Tous les fichiers de données sont situés dans le répertoire `javascript/data/`.
 - **Liste des thèmes** : La liste des thèmes disponibles est gérée dans `javascript/data/listeThematiques.js`.
@@ -263,18 +263,23 @@ Pour ajouter un nouveau thème à votre quiz, suivez les étapes suivantes :
        texte: "What is the chemical symbol for water?",
        tableauDeChoix: ["O2", "H2O", "CO2", "NaCl"],
        reponse: "H2O",
-       image: "images/water.jpg"
+       image: "images/water.jpg",
      },
      {
        texte: "Who proposed the theory of relativity?",
-       tableauDeChoix: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Nikola Tesla"],
+       tableauDeChoix: [
+         "Isaac Newton",
+         "Albert Einstein",
+         "Galileo Galilei",
+         "Nikola Tesla",
+       ],
        reponse: "Albert Einstein",
-       image: "images/einstein.jpg"
+       image: "images/einstein.jpg",
      },
      // Ajoutez d'autres questions si nécessaire
-   ] ;
+   ];
 
-   export default questionsScience ;
+   export default questionsScience;
    ```
 
 3. **Exporter les questions** :
@@ -302,9 +307,9 @@ Pour ajouter un nouveau thème à votre quiz, suivez les étapes suivantes :
        nom: "Science",
        data_thematique: "science",
      },
-   ] ;
+   ];
 
-   export default listeThematiques ;
+   export default listeThematiques;
    ```
 
    - **`nom`** : Le nom d'affichage de votre thème.
@@ -312,7 +317,7 @@ Pour ajouter un nouveau thème à votre quiz, suivez les étapes suivantes :
 
 ### Étape 4 : Importer les questions du nouveau thème
 
-1. **Ouvrez la fonction de changement de thème :
+1. \*\*Ouvrez la fonction de changement de thème :
 
    ```plaintext
    javascript/functions/changerThematique.js
@@ -385,12 +390,12 @@ Pour supprimer un thème de votre quiz, suivez les étapes suivantes :
        nom: "Marvel",
        data_thematique: "marvel",
      },
-   ] ;
+   ];
 
    // Après suppression
    const listeThematiques = [
      // Autres thèmes...
-   ] ;
+   ];
    ```
 
 ### Étape 3 : Supprimer les importations et les références
@@ -446,14 +451,19 @@ Pour ajouter de nouvelles questions à un thème existant :
      // Questions existantes...
      {
        texte: "What does 'CPU' stand for in computer terms?",
-       tableauDeChoix: ["Central Processing Unit", "Computer Personal Unit", "Central Performance Unit", "Compute Power Unit"],
+       tableauDeChoix: [
+         "Central Processing Unit",
+         "Computer Personal Unit",
+         "Central Performance Unit",
+         "Compute Power Unit",
+       ],
        reponse: "Central Processing Unit",
-       image: "images/cpu.jpg" // Optional
+       image: "images/cpu.jpg", // Optional
      },
      // Ajouter d'autres questions si nécessaire
    ];
 
-   export default questionsTechnologie ;
+   export default questionsTechnologie;
    ```
 
 3. **S'assurer que la syntaxe est correcte** :

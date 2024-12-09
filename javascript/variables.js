@@ -5,11 +5,11 @@ import questionsFilmsEtSeries from "./data/questionsFilmsEtSeries.js";
 
 // on définit les variables du quiz
 const variables = {
-    questionsThematiqueChoisie: questionsFilmsEtSeries,
-    numeroQuestionActuelle: 0,
-    score: 0,
-    tempsRestant: 5,
-    timer: null,
+  questionsThematiqueChoisie: questionsFilmsEtSeries,
+  numeroQuestionActuelle: 0,
+  score: 0,
+  tempsRestant: 5,
+  timer: null,
 };
 
 export default variables;

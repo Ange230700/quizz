@@ -66,7 +66,6 @@
   cursor: not-allowed;
 }
 
-
 #timer {
   justify-content: left;
 }
@@ -112,13 +111,12 @@
   justify-content: end;
   width: 100%;
 }
-  
 
 #timer {
   shape-outside: circle(300%) border-box;
   background-color: #23074d;
-  color:  #fcfbfa;
-  border-radius: 50% ;
+  color: #fcfbfa;
+  border-radius: 50%;
   border: #ffffff 2px solid;
   width: 100px;
   height: 100px;
